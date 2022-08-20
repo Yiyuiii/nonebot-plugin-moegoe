@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "nonebot-plugin-moegoe"
+version = "0.1.0"
+description = "日韩中 VITS 模型拟声"
+license = "MIT"
+authors = ["yiyuiii <yiyuiii@foxmail.com>"]
+readme = "README.md"
+homepage = "https://github.com/yiyuiii/nonebot-plugin-moegoe"
+repository = "https://github.com/yiyuiii/nonebot-plugin-moegoe"
+documentation = "https://github.com/yiyuiii/nonebot-plugin-moegoe#readme"
+keywords = ["nonebot", "nonebot2", "moegoe"]
+packages = [
+    { include = "nonebot_plugin_moegoe/*.py", from = ".." }
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+nonebot2 = "^2.0.0-beta.1"
+nonebot-adapter-onebot = { version = "^2.0.0-beta.1", optional = true }
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.extras]
+onebot = ["nonebot-adapter-onebot"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
