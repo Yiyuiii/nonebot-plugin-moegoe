@@ -33,6 +33,10 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
   <img src="https://img.shields.io/badge/python-3.7+-blue.svg" alt="python">
 </p>
 
+## 安装方法
+nb plugin install nonebot_plugin_moegoe
+或 pip install nonebot_plugin_moegoe
+
 ## 使用方式
 
 **在聊天中输入:**
