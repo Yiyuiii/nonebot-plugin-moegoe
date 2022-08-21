@@ -15,7 +15,7 @@ __plugin_meta__ = PluginMetadata(
         "unique_name": "moegoe",
         "example": "让派蒙说中文：你好",
         "author": "yiyuiii <yiyuiii@foxmail.com>",
-        "version": "0.1.0",
+        "version": "0.2.0",
     },
 )
 
@@ -23,8 +23,20 @@ jpapi = Template("https://moegoe.azurewebsites.net/api/speak?text=${text}&id=${i
 krapi = Template("https://moegoe.azurewebsites.net/api/speakkr?text=${text}&id=${id}")
 cnapi = Template("http://233366.proxy.nscc-gz.cn:8888?speaker=${id}&text=${text}")
 
+# api for other plugins
 jp_dict = {"宁宁": 0, "爱瑠": 1, "芳乃": 2, "茉子": 3, "丛雨": 4, "小春": 5, "七海": 6, }
+def jp_func(msg, name='宁宁'):
+    return MessageSegment.record(jpapi.substitute(text=msg, id=jp_dict[name]))
+
+
 kr_dict = {"Sua": 0, "Mimiru": 1, "Arin": 2, "Yeonhwa": 3, "Yuhwa": 4, "Seonbae": 5, }
+def kr_func(msg, name='Sua'):
+    return MessageSegment.record(krapi.substitute(text=msg, id=kr_dict[name]))
+
+
+def cn_func(msg, name='派蒙'):
+    return MessageSegment.record(cnapi.substitute(text=msg, id=name))
+
 
 jp_regex = "^让(宁宁|爱瑠|芳乃|茉子|丛雨|小春|七海)说日语：(.+)$"
 kr_regex = "^让(Sua|Mimiru|Arin|Yeonhwa|Yuhwa|Seonbae)说韩语：(.+)$"
@@ -38,16 +50,16 @@ cn_cmd = on_regex(cn_regex, block=True, priority=5)
 @jp_cmd.handle()
 async def _(matched: Tuple[Any, ...] = RegexGroup()):
     name, msg = matched[0], matched[1]
-    await jp_cmd.finish(MessageSegment.record(jpapi.substitute(text=msg, id=jp_dict[name])))
+    await jp_cmd.finish(jp_func(msg=msg, name=name))
 
 
 @kr_cmd.handle()
 async def _(matched: Tuple[Any, ...] = RegexGroup()):
     name, msg = matched[0], matched[1]
-    await kr_cmd.finish(MessageSegment.record(krapi.substitute(text=msg, id=kr_dict[name])))
+    await kr_cmd.finish(kr_func(msg=msg, name=name))
 
 
 @cn_cmd.handle()
 async def _(matched: Tuple[Any, ...] = RegexGroup()):
     name, msg = matched[0], matched[1]
-    await cn_cmd.finish(MessageSegment.record(cnapi.substitute(text=msg, id=name)))
+    await cn_cmd.finish(cn_func(msg=msg, name=name))
