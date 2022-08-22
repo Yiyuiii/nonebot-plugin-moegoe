@@ -16,7 +16,7 @@ __plugin_meta__ = PluginMetadata(
         "unique_name": "moegoe",
         "example": "让派蒙说你好！旅行者。",
         "author": "yiyuiii <yiyuiii@foxmail.com>",
-        "version": "0.4.0",
+        "version": "0.4.1",
     },
 )
 
@@ -38,7 +38,8 @@ def kr_func(msg, name='Sua'):
 
 
 def cn_func(msg, name='派蒙'):
-    return MessageSegment.record(cnapi.substitute(text=msg, id=name))
+    voice = requests.get(cnapi.substitute(text=msg, id=name)).content
+    return MessageSegment.record(voice)
 
 
 jp_regex = "^让(宁宁|爱瑠|芳乃|茉子|丛雨|小春|七海)说(?:日语|日文|日本语)：(.+)$"
