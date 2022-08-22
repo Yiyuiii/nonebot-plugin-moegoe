@@ -53,7 +53,7 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 
 - 注意安装的包名是带**下划线**的：nonebot_plugin_moegoe
 
-2. API不能正确生成语音（[Issue 2](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/2)[Issue 4](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/4)）
+2. API不能正确生成语音（[Issue 2](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/2) [Issue 4](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/4)）
 
 - 第一种情况：**中文语音api对输入要求很严**，只支持中文字符和几个标点符号，输入如果包含api无法处理的字符就会无法生成语音，包括英文、叠词、奇怪的标点符号等就大概率不行。
 - 第二种情况：当后台在报`encode silk failed: convert pcm file error: exec: "ffmpeg": executable file not found in %PATH% `错误时，表示go-cqhttp编码音频所依赖的ffmpeg包没有被安装，所以不能发送音频。**请自行安装ffmpeg**。
