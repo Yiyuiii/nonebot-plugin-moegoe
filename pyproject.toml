@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot-plugin-moegoe"
-version = "0.2.0"
+version = "0.3.0"
 description = "日韩中 VITS 模型拟声"
 license = "MIT"
 authors = ["yiyuiii <yiyuiii@foxmail.com>"]
@@ -17,6 +17,7 @@ packages = [
 python = "^3.8"
 nonebot2 = "^2.0.0-beta.1"
 nonebot-adapter-onebot = { version = "^2.0.0-beta.1", optional = true }
+requests = ">=2.10"
 
 [tool.poetry.dev-dependencies]
 

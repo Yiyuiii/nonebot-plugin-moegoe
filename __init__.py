@@ -1,8 +1,9 @@
 from typing import Tuple, Any
 from string import Template
+import requests
 from nonebot.params import RegexGroup
 from nonebot.plugin import PluginMetadata, on_regex
-from nonebot.adapters.onebot.v11 import MessageSegment
+from nonebot.adapters.onebot.v11 import MessageSegment, ActionFailed
 
 __plugin_meta__ = PluginMetadata(
     name="nonebot-plugin-moegoe",
@@ -15,7 +16,7 @@ __plugin_meta__ = PluginMetadata(
         "unique_name": "moegoe",
         "example": "让派蒙说中文：你好",
         "author": "yiyuiii <yiyuiii@foxmail.com>",
-        "version": "0.2.0",
+        "version": "0.3.0",
     },
 )
 
@@ -26,12 +27,14 @@ cnapi = Template("http://233366.proxy.nscc-gz.cn:8888?speaker=${id}&text=${text}
 # api for other plugins
 jp_dict = {"宁宁": 0, "爱瑠": 1, "芳乃": 2, "茉子": 3, "丛雨": 4, "小春": 5, "七海": 6, }
 def jp_func(msg, name='宁宁'):
-    return MessageSegment.record(jpapi.substitute(text=msg, id=jp_dict[name]))
+    voice = requests.get(jpapi.substitute(text=msg, id=jp_dict[name])).content
+    return MessageSegment.record(voice)
 
 
 kr_dict = {"Sua": 0, "Mimiru": 1, "Arin": 2, "Yeonhwa": 3, "Yuhwa": 4, "Seonbae": 5, }
 def kr_func(msg, name='Sua'):
-    return MessageSegment.record(krapi.substitute(text=msg, id=kr_dict[name]))
+    voice = requests.get(krapi.substitute(text=msg, id=kr_dict[name])).content
+    return MessageSegment.record(voice)
 
 
 def cn_func(msg, name='派蒙'):
@@ -50,16 +53,25 @@ cn_cmd = on_regex(cn_regex, block=True, priority=5)
 @jp_cmd.handle()
 async def _(matched: Tuple[Any, ...] = RegexGroup()):
     name, msg = matched[0], matched[1]
-    await jp_cmd.finish(jp_func(msg=msg, name=name))
+    try:
+        await jp_cmd.finish(jp_func(msg=msg, name=name))
+    except ActionFailed as e:
+        await jp_cmd.finish('API调用失败：' + str(e) + '。请检查输入字符是否匹配语言。')
 
 
 @kr_cmd.handle()
 async def _(matched: Tuple[Any, ...] = RegexGroup()):
     name, msg = matched[0], matched[1]
-    await kr_cmd.finish(kr_func(msg=msg, name=name))
+    try:
+        await kr_cmd.finish(kr_func(msg=msg, name=name))
+    except ActionFailed as e:
+        await kr_cmd.finish('API调用失败：' + str(e) + '。请检查输入字符是否匹配语言。')
 
 
 @cn_cmd.handle()
 async def _(matched: Tuple[Any, ...] = RegexGroup()):
     name, msg = matched[0], matched[1]
-    await cn_cmd.finish(cn_func(msg=msg, name=name))
+    try:
+        await cn_cmd.finish(cn_func(msg=msg, name=name))
+    except ActionFailed as e:
+        await cn_cmd.finish('API调用失败：' + str(e) + '。请检查输入字符是否匹配语言。')
