@@ -30,7 +30,7 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
   <a href="https://pypi.python.org/pypi/nonebot-plugin-status">
     <img src="https://img.shields.io/pypi/v/nonebot-plugin-status.svg" alt="pypi">
   </a>
-  <img src="https://img.shields.io/badge/python-3.7+-blue.svg" alt="python">
+  <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="python">
 </p>
 
 ## 安装方法
@@ -62,6 +62,9 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 - 第三种情况：**本插件默认优先级为5**，若有其它的插件优先级比5强，且该插件有block截断，则本插件可能无法收到并处理消息。目前需要自行调整插件的优先级。
 
 ## 更新日志
+#### 2022.10.03 > v0.5.2
+- 增加包依赖的nonebot版本限制（仅此而已）
+
 #### 2022.08.24 > v0.5.1
 - 在`让xx说xx：`正则式中添加冒号的全角半角匹配`(：|:)`（此外，之前版本已经添加形如`(日语|日文|日本语)`的正则匹配）
 

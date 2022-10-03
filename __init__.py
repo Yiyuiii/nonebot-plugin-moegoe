@@ -17,7 +17,7 @@ __plugin_meta__ = PluginMetadata(
         "unique_name": "moegoe",
         "example": "让派蒙说你好！旅行者。",
         "author": "yiyuiii <yiyuiii@foxmail.com>",
-        "version": "0.5.1",
+        "version": "0.5.2",
     },
 )
 
