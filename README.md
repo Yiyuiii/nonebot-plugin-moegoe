@@ -48,23 +48,24 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 
 例：
 
-- 让派蒙说你好！旅行者。
-- 让宁宁说日语：hello.
-- 让Sua说韩语：hello.
+- [让派蒙说你好！旅行者。](http://233366.proxy.nscc-gz.cn:8888?speaker=派蒙&text=你好！旅行者。)
+- [让宁宁说日语：hello.](https://moegoe.azurewebsites.net/api/speak?text=hello!&id=0)
+- [让Sua说韩语：hello.](https://moegoe.azurewebsites.net/api/speakkr?text=hello!&id=0)
 
-**Bot返回语音：**
+**Bot返回语音**
 
-<audio src="http://233366.proxy.nscc-gz.cn:8888?speaker=派蒙&text=你好！旅行者。"></audio>
+<!-- <p align="center">
+  <audio src="http://233366.proxy.nscc-gz.cn:8888?speaker=派蒙&text=你好！旅行者。"></audio>
 
 <audio src="https://moegoe.azurewebsites.net/api/speak?text=hello!&id=0"></audio>
 
 <audio src="https://moegoe.azurewebsites.net/api/speakkr?text=hello!&id=0"></audio>
+</p> -->
 
 ## :speech_balloon: 常见问题
 
 <details>
 <summary>报错 ERROR: No matching distribution found for nonebot-plugin-moegoe</summary>
-
 [Issue 1](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/1)
 
  - 注意安装的包名是带**下划线**的：nonebot_plugin_moegoe
@@ -95,7 +96,4 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 - 在中文语音中，将输入文字中的英文符号和0-9数字预处理为中文
 - 优化报错提示
 - 整理代码
-  Footer
-  © 2022 GitHub, Inc.
-  Footer navigation
-  Terms
+  
