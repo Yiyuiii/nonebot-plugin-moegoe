@@ -1,8 +1,8 @@
 <!--
  * @Author         : yiyuiii
- * @Date           : 2020-8-20 22:30:00
+ * @Date           : 2022-10--11 20:00:00
  * @LastEditors    : yiyuiii
- * @LastEditTime   : 2020-8-20 22:30:00
+ * @LastEditTime   : 2022-10--11 20:00:00
  * @Description    : None
  * @GitHub         : https://github.com/yiyuiii
 -->
@@ -33,11 +33,12 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
   <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="python">
 </p>
 
-## 安装方法
+## :gear: 安装方法
+
 `nb plugin install nonebot_plugin_moegoe`
 或 `pip install nonebot_plugin_moegoe`
 
-## 使用方式
+## :rocket: 使用方式
 
 **在聊天中输入:**
 
@@ -45,24 +46,44 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 - **让**[宁宁|爱瑠|芳乃|茉子|丛雨|小春|七海|妃爱|华乃|亚澄|诗樱|天梨|里|广梦|莉莉子]**说日语：**(日语)
 - **让**[Sua|Mimiru|Arin|Yeonhwa|Yuhwa|Seonbae]**说韩语：**(韩语)
 
-例：让派蒙说你好！旅行者。
+例：
 
-**Bot返回语音**
+- 让派蒙说你好！旅行者。
+- 让宁宁说日语：hello.
+- 让Sua说韩语：hello.
 
-## 常见问题
+**Bot返回语音：**
 
-1. `ERROR: No matching distribution found for nonebot-plugin-moegoe`（[Issue 1](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/1)）
+<audio src="http://233366.proxy.nscc-gz.cn:8888?speaker=派蒙&text=你好！旅行者。"></audio>
 
-- 注意安装的包名是带**下划线**的：nonebot_plugin_moegoe
+<audio src="https://moegoe.azurewebsites.net/api/speak?text=hello!&id=0"></audio>
 
-2. API不能正确生成语音（[Issue 2](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/2) [Issue 4](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/4)）
+<audio src="https://moegoe.azurewebsites.net/api/speakkr?text=hello!&id=0"></audio>
+
+## :speech_balloon: 常见问题
+
+<details>
+<summary>报错 ERROR: No matching distribution found for nonebot-plugin-moegoe</summary>
+
+[Issue 1](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/1)
+
+ - 注意安装的包名是带**下划线**的：nonebot_plugin_moegoe
+</details>
+
+<details>
+<summary>API不能正确生成语音</summary>
+
+[Issue 2](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/2) | [Issue 4](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/4)
 
 - 第一种情况：**中文语音api对输入要求很严**，只支持中文字符和几个标点符号，输入如果包含api无法处理的字符就会无法生成语音，包括英文、叠词、奇怪标点符号等就大概率不行。
 - 第二种情况：当后台在报`encode silk failed: convert pcm file error: exec: "ffmpeg": executable file not found in %PATH% `错误时，表示go-cqhttp编码音频所依赖的ffmpeg包没有被安装，所以不能发送音频。**请自行安装ffmpeg**。*（不过ffmpeg可能不是必须的。如果有人在不安装ffmpeg时能正常使用，请向我反馈，这一点还没有经过测试。）*
 - 第三种情况：**本插件默认优先级为5**，若有其它的插件优先级比5强，且该插件有block截断，则本插件可能无法收到并处理消息。目前需要自行调整插件的优先级。
+</details>
 
-## 更新日志
-#### 2022.10.03 > v0.5.2
+## :clipboard: 更新日志
+
+#### 2022.10.03 > v0.5.2 :fire:
+
 - 增加包依赖的nonebot版本限制（仅此而已）
 
 #### 2022.08.24 > v0.5.1
@@ -74,3 +95,7 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 - 在中文语音中，将输入文字中的英文符号和0-9数字预处理为中文
 - 优化报错提示
 - 整理代码
+  Footer
+  © 2022 GitHub, Inc.
+  Footer navigation
+  Terms
