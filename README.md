@@ -48,14 +48,14 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 
 例：
 
-- [让派蒙说你好！旅行者。](http://233366.proxy.nscc-gz.cn:8888?speaker=派蒙&text=你好！旅行者。)
+- [让派蒙说你好！旅行者。](https://genshin.azurewebsites.net/api/speak?format=mp3&text=你好！旅行者。&id=0)
 - [让宁宁说日语：hello.](https://moegoe.azurewebsites.net/api/speak?text=hello!&id=0)
 - [让Sua说韩语：hello.](https://moegoe.azurewebsites.net/api/speakkr?text=hello!&id=0)
 
 **Bot返回语音**
 
 <!-- <p align="center">
-  <audio src="http://233366.proxy.nscc-gz.cn:8888?speaker=派蒙&text=你好！旅行者。"></audio>
+  <audio src="https://genshin.azurewebsites.net/api/speak?format=mp3&text=你好！旅行者。&id=0"></audio>
 
 <audio src="https://moegoe.azurewebsites.net/api/speak?text=hello!&id=0"></audio>
 
@@ -84,8 +84,10 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 
 ## :clipboard: 更新日志
 
-#### 2022.10.03 > v0.5.2 :fire:
+#### 2022.10.11 > v0.6.0 :fire:
+- 同步更新中文原神语音api
 
+#### 2022.10.03 > v0.5.2
 - 增加包依赖的nonebot版本限制（仅此而已）
 
 #### 2022.08.24 > v0.5.1
@@ -97,4 +99,3 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 - 在中文语音中，将输入文字中的英文符号和0-9数字预处理为中文
 - 优化报错提示
 - 整理代码
-  
