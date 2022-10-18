@@ -82,6 +82,16 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 - 第三种情况：**本插件默认优先级为5**，若有其它的插件优先级比5强，且该插件有block截断，则本插件可能无法收到并处理消息。目前需要自行调整插件的优先级。
 </details>
 
+<details>
+<summary>API不能生成较长语音</summary>
+
+目前API生成较长语音的速度很慢（从数十秒到数分钟），为避免该类请求的并发造成资源阻塞，代码中限制了请求时长，可自行修改。
+
+`resp = await client.get(url, timeout=120)`
+</details>
+
+
+
 ## :clipboard: 更新日志
 
 #### 2022.10.11 > v0.6.0 :fire:
