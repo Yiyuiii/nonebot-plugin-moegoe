@@ -1,6 +1,5 @@
 version = "0.7.0"
 priority = 5
-profile_url = "https://ghproxy.com/https://raw.githubusercontent.com/Yiyuiii/nonebot-plugin-moegoe/master/profile.toml"
 
 [plugin_meta]
 name = "nonebot-plugin-moegoe"
@@ -14,6 +13,10 @@ moegoe
 unique_name = "moegoe"
 example = "让派蒙说你好！旅行者。"
 author = "yiyuiii <yiyuiii@foxmail.com>"
+
+[download]
+profile_url = "https://raw.githubusercontent.com/Yiyuiii/nonebot-plugin-moegoe/master/profile.toml"
+proxy_url = "https://ghproxy.com/"
 
 [jpapi]
 url = "https://moegoe.azurewebsites.net/api/speak?text=${text}&id=${id}"
