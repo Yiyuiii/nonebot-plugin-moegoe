@@ -1,8 +1,8 @@
 <!--
  * @Author         : yiyuiii
- * @Date           : 2022-10--11 20:00:00
+ * @Date           : 2022-10-11 20:00:00
  * @LastEditors    : yiyuiii
- * @LastEditTime   : 2022-10--11 20:00:00
+ * @LastEditTime   : 2022-11-29 20:00:00
  * @Description    : None
  * @GitHub         : https://github.com/yiyuiii
 -->
@@ -62,6 +62,17 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 <audio src="https://moegoe.azurewebsites.net/api/speakkr?text=hello!&id=0"></audio>
 </p> -->
 
+## :gear: 配置方法
+
+在插件初次联网成功运行后，可以发现 BOTROOT/data/moegoe/ 路径下有profile.toml文件，其中可以配置
+
+- 插件优先级 priority
+- 触发正则语句 regex
+
+等等。 修改后保存，重启生效。
+
+当插件版本更新时新配置将覆盖旧配置，如果不希望被覆盖可以在profile.toml中把版本调高。
+
 ## :speech_balloon: 常见问题
 
 <details>
@@ -90,11 +101,20 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 `resp = await client.get(url, timeout=120)`
 </details>
 
+<details>
+<summary>API挂了</summary>
+
+[Issue 7](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/7) | [Issue 15](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/15)
+
+</details>
 
 
 ## :clipboard: 更新日志
 
-#### 2022.10.11 > v0.6.0 :fire:
+#### 2022.11.29 > v0.7.0 :fire:
+- 从__init__.py抽离一些配置组成profile.toml配置文件，现在可以自动从github上抓取url等配置的更新了。
+
+#### 2022.10.11 > v0.6.0
 - 同步更新中文原神语音api
 
 #### 2022.10.03 > v0.5.2

@@ -1,74 +1,113 @@
 from typing import Tuple, Any
 from string import Template
+from pathlib import Path
+import rtoml as tomllib
 import httpx
+from nonebot.log import logger
 from nonebot.matcher import Matcher
 from nonebot.params import RegexGroup
 from nonebot.plugin import PluginMetadata, on_regex
 from nonebot.adapters.onebot.v11 import MessageSegment, ActionFailed
+from nonebot import get_driver
 
+driver = get_driver()
+
+dataPath = Path() / 'data' / 'moegoe'
+profilePath = dataPath / 'profile.toml'
+
+profileDict = None
+if profilePath.exists():
+    try:
+        profileDict = tomllib.load(profilePath)
+    except Exception as e:
+        logger.warning(f"Error loading {profilePath}, {str(e)}.")
+if profileDict is None:
+    profileDict = tomllib.load(Path(__file__).parent / 'profile.toml')
+
+
+def profilePreprocess():
+    global jpapi, jp2api, krapi, cnapi, jp_dict, jp2_dict, kr_dict, cn_dict
+    jpapi = Template(profileDict['jpapi']['url'])
+    jp2api = Template(profileDict['jp2api']['url'])
+    krapi = Template(profileDict['krapi']['url'])
+    cnapi = Template(profileDict['cnapi']['url'])
+    jp_dict, jp2_dict, kr_dict, cn_dict = [dict() for _ in range(4)]
+    for d, l in ((jp_dict, profileDict['jpapi']['order']),
+                 (jp2_dict, profileDict['jp2api']['order']),
+                 (kr_dict, profileDict['krapi']['order']),
+                 (cn_dict, profileDict['cnapi']['order'])):
+        for i, n in enumerate(l):
+            d[n] = i
+
+
+@driver.on_startup
+async def update():
+    global profileDict
+    from .utils import download_url, write_file, versionGreater
+    profileData = await download_url(profileDict['download']['proxy_url'] + profileDict['download']['profile_url'])
+    if profileData is None:
+        profileData = await download_url(profileDict['download']['profile_url'])
+    if profileData is None:
+        logger.warning(f"Error updating profile for moegoe.")
+        return
+
+    newProfileDict = tomllib.loads(profileData.decode('utf-8'))
+    if versionGreater(newProfileDict['version'], profileDict['version']):
+        write_file(profilePath, profileData)
+        profileDict = newProfileDict
+        profilePreprocess()
+        logger.info(f"moegoe profile updated to version {profileDict['version']}.")
+
+
+__version__ = profileDict['version']
 __plugin_meta__ = PluginMetadata(
-    name="nonebot-plugin-moegoe",
-    description="日韩中 VITS 模型拟声",
-    usage="moegoe\n" +
-          "- 让[宁宁|爱瑠|芳乃|茉子|丛雨|小春|七海|妃爱|华乃|亚澄|诗樱|天梨|里|广梦|莉莉子]说日语：(日语)\n" +
-          "- 让[Sua|Mimiru|Arin|Yeonhwa|Yuhwa|Seonbae]说韩语：(韩语)\n" +
-          "- 让[派蒙|凯亚|安柏|丽莎|琴|香菱|枫原万叶|迪卢克|温迪|可莉|早柚|托马|芭芭拉|优菈|云堇|钟离|魈|凝光|雷电将军|北斗|甘雨|七七|刻晴|神里绫华|雷泽|神里绫人|罗莎莉亚|阿贝多|八重神子|宵宫|荒泷一斗|九条裟罗|夜兰|珊瑚宫心海|五郎|达达利亚|莫娜|班尼特|申鹤|行秋|烟绯|久岐忍|辛焱|砂糖|胡桃|重云|菲谢尔|诺艾尔|迪奥娜|鹿野院平藏]说(中文)",
+    name=profileDict['plugin_meta']['name'],
+    description=profileDict['plugin_meta']['description'],
+    usage=profileDict['plugin_meta']['usage'],
     extra={
-        "unique_name": "moegoe",
-        "example": "让派蒙说你好！旅行者。",
-        "author": "yiyuiii <yiyuiii@foxmail.com>",
-        "version": "0.6.0",
+        "unique_name": profileDict['plugin_meta']['unique_name'],
+        "example": profileDict['plugin_meta']['example'],
+        "author": profileDict['plugin_meta']['author'],
+        "version": __version__,
     },
 )
 
-jpapi = Template("https://moegoe.azurewebsites.net/api/speak?text=${text}&id=${id}")
-jp2api = Template("https://moegoe.azurewebsites.net/api/speak2?text=${text}&id=${id}")
-krapi = Template("https://moegoe.azurewebsites.net/api/speakkr?text=${text}&id=${id}")
-cnapi = Template("https://genshin.azurewebsites.net/api/speak?format=mp3&text=${text}&id=${id}")
+profilePreprocess()
+
 
 # api for other plugins
 async def get_record(url):
     async with httpx.AsyncClient() as client:
-        resp = await client.get(url, timeout=20)
+        resp = await client.get(url, timeout=120)
     resp.raise_for_status()
     voice = resp.content
     return MessageSegment.record(voice)
 
 
-jp_dict = {"宁宁": 0, "爱瑠": 1, "芳乃": 2, "茉子": 3, "丛雨": 4, "小春": 5, "七海": 6, }
-async def jp_func(msg, name='宁宁'):
+async def jp_func(msg, name=profileDict['jpapi']['order'][0]):
     url = jpapi.substitute(text=msg, id=jp_dict[name])
     return await get_record(url)
 
 
-jp2_dict = {"妃爱": 0, "华乃": 1, "亚澄": 2, "诗樱": 3, "天梨": 4, "里": 5, "广梦": 6, "莉莉子": 7, }
-async def jp2_func(msg, name='妃爱'):
+async def jp2_func(msg, name=profileDict['jp2api']['order'][0]):
     url = jp2api.substitute(text=msg, id=jp2_dict[name])
     return await get_record(url)
 
 
-kr_dict = {"Sua": 0, "Mimiru": 1, "Arin": 2, "Yeonhwa": 3, "Yuhwa": 4, "Seonbae": 5, }
-async def kr_func(msg, name='Sua'):
+async def kr_func(msg, name=profileDict['krapi']['order'][0]):
     url = krapi.substitute(text=msg, id=kr_dict[name])
     return await get_record(url)
 
 
-cn_dict = {"派蒙": 0, "凯亚": 1, "安柏": 2, "丽莎": 3, "琴": 4, "香菱": 5, "枫原万叶": 6, "迪卢克": 7, "温迪": 8, "可莉": 9, "早柚": 10, "托马": 11, "芭芭拉": 12, "优菈": 13, "云堇": 14, "钟离": 15, "魈": 16, "凝光": 17, "雷电将军": 18, "北斗": 19, "甘雨": 20, "七七": 21, "刻晴": 22, "神里绫华": 23, "戴因斯雷布": 24, "雷泽": 25, "神里绫人": 26, "罗莎莉亚": 27, "阿贝多": 28, "八重神子": 29, "宵宫": 30, "荒泷一斗": 31, "九条裟罗": 32, "夜兰": 33, "珊瑚宫心海": 34, "五郎": 35, "散兵": 36, "女士": 37, "达达利亚": 38, "莫娜": 39, "班尼特": 40, "申鹤": 41, "行秋": 42, "烟绯": 43, "久岐忍": 44, "辛焱": 45, "砂糖": 46, "胡桃": 47, "重云": 48, "菲谢尔": 49, "诺艾尔": 50, "迪奥娜": 51, "鹿野院平藏": 52,}
-async def cn_func(msg, name='派蒙'):
+async def cn_func(msg, name=profileDict['cnapi']['order'][0]):
     url = cnapi.substitute(text=msg, id=cn_dict[name])
     return await get_record(url)
 
 
-jp_regex = "^让(宁宁|爱瑠|芳乃|茉子|丛雨|小春|七海)说(?:日语|日文|日本语)(?:：|:)(.+)$"
-jp2_regex = "^让(妃爱|华乃|亚澄|诗樱|天梨|里|广梦|莉莉子)说(?:日语|日文|日本语)(?:：|:)(.+)$"
-kr_regex = "^让(Sua|Mimiru|Arin|Yeonhwa|Yuhwa|Seonbae)说(?:韩语|韩文|韩国语)(?:：|:)(.+)$"
-cn_regex = "^让(派蒙|凯亚|安柏|丽莎|琴|香菱|枫原万叶|迪卢克|温迪|可莉|早柚|托马|芭芭拉|优菈|云堇|钟离|魈|凝光|雷电将军|北斗|甘雨|七七|刻晴|神里绫华|雷泽|神里绫人|罗莎莉亚|阿贝多|八重神子|宵宫|荒泷一斗|九条裟罗|夜兰|珊瑚宫心海|五郎|达达利亚|莫娜|班尼特|申鹤|行秋|烟绯|久岐忍|辛焱|砂糖|胡桃|重云|菲谢尔|诺艾尔|迪奥娜|鹿野院平藏)说(.+)$"
-
-Priority = 5
-jp_cmd = on_regex(jp_regex, block=True, priority=Priority)
-jp2_cmd = on_regex(jp2_regex, block=True, priority=Priority)
-kr_cmd = on_regex(kr_regex, block=True, priority=Priority)
-cn_cmd = on_regex(cn_regex, block=True, priority=Priority)
+jp_cmd = on_regex(profileDict['jpapi']['regex'], block=True, priority=profileDict['priority'])
+jp2_cmd = on_regex(profileDict['jp2api']['regex'], block=True, priority=profileDict['priority'])
+kr_cmd = on_regex(profileDict['krapi']['regex'], block=True, priority=profileDict['priority'])
+cn_cmd = on_regex(profileDict['cnapi']['regex'], block=True, priority=profileDict['priority'])
 
 
 async def msg_process(matcher: Matcher, matched: Tuple[Any, ...], api_func):
@@ -99,14 +138,10 @@ async def _(matcher: Matcher, matched: Tuple[Any, ...] = RegexGroup()):
     await msg_process(matcher, matched, kr_func)
 
 
-CN_replace_list = (
-    (',', '，'), ('.', '。'), ('!', '！'), ('?', '？'), ('0', '零'), ('1', '一'), ('2', '二'), ('3', '三'), ('4', '四'),
-    ('5', '五'), ('6', '六'), ('7', '七'), ('8', '八'), ('9', '九'),)
-
 @cn_cmd.handle()
 async def _(matcher: Matcher, matched: Tuple[Any, ...] = RegexGroup()):
     name, msg = matched[0], matched[1]
-    for en, cn in CN_replace_list:
+    for en, cn in profileDict['cnapi']['replace']:
         msg = msg.replace(en, cn)
     try:
         record = await cn_func(msg=msg, name=name)
