@@ -24,11 +24,11 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 </div>
 
 <p align="center">
-  <a href="https://raw.githubusercontent.com/cscs181/QQ-Github-Bot/master/LICENSE">
-    <img src="https://img.shields.io/github/license/cscs181/QQ-Github-Bot.svg" alt="license">
+  <a href="https://raw.githubusercontent.com/Yiyuiii/nonebot-plugin-moegoe/master/LICENSE">
+    <img src="https://img.shields.io/github/license/Yiyuiii/nonebot-plugin-moegoe.svg" alt="license">
   </a>
-  <a href="https://pypi.python.org/pypi/nonebot-plugin-status">
-    <img src="https://img.shields.io/pypi/v/nonebot-plugin-status.svg" alt="pypi">
+  <a href="https://pypi.python.org/pypi/nonebot-plugin-moegoe">
+    <img src="https://img.shields.io/pypi/v/nonebot-plugin-moegoe.svg" alt="pypi">
   </a>
   <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="python">
 </p>
