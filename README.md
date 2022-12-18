@@ -117,7 +117,7 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 ## :clipboard: 更新日志
 
 #### 2022.11.29 > v0.7.1 :fire:
-- 修复安装失败的BUG。
+- 修复安装失败的BUG。profile.toml的位置改变，之前版本的配置可能无法自动更新profile.toml配置文件。
 
 #### 2022.11.29 > v0.7.0
 - 从__init__.py抽离一些配置组成profile.toml配置文件，现在可以自动从github上抓取url等配置的更新了。
