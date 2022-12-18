@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot-plugin-moegoe"
-version = "0.7.0"
+version = "0.7.1"
 description = "日韩中 VITS 模型拟声"
 license = "MIT"
 authors = ["yiyuiii <yiyuiii@foxmail.com>"]
@@ -9,10 +9,6 @@ homepage = "https://github.com/yiyuiii/nonebot-plugin-moegoe"
 repository = "https://github.com/yiyuiii/nonebot-plugin-moegoe"
 documentation = "https://github.com/yiyuiii/nonebot-plugin-moegoe#readme"
 keywords = ["nonebot", "nonebot2", "moegoe"]
-packages = [
-    { include = "*.py", from = "." },
-    { include = "profile.toml", from = "." }
-]
 
 [tool.poetry.dependencies]
 python = "^3.8"

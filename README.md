@@ -2,7 +2,7 @@
  * @Author         : yiyuiii
  * @Date           : 2022-10-11 20:00:00
  * @LastEditors    : yiyuiii
- * @LastEditTime   : 2022-11-29 20:00:00
+ * @LastEditTime   : 2022-12-18 20:00:00
  * @Description    : None
  * @GitHub         : https://github.com/yiyuiii
 -->
@@ -24,11 +24,11 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 </div>
 
 <p align="center">
-  <a href="https://raw.githubusercontent.com/Yiyuiii/nonebot-plugin-moegoe/master/LICENSE">
-    <img src="https://img.shields.io/github/license/Yiyuiii/nonebot-plugin-moegoe.svg" alt="license">
+  <a href="https://raw.githubusercontent.com/cscs181/QQ-Github-Bot/master/LICENSE">
+    <img src="https://img.shields.io/github/license/cscs181/QQ-Github-Bot.svg" alt="license">
   </a>
-  <a href="https://pypi.python.org/pypi/nonebot-plugin-moegoe">
-    <img src="https://img.shields.io/pypi/v/nonebot-plugin-moegoe.svg" alt="pypi">
+  <a href="https://pypi.python.org/pypi/nonebot-plugin-status">
+    <img src="https://img.shields.io/pypi/v/nonebot-plugin-status.svg" alt="pypi">
   </a>
   <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="python">
 </p>
@@ -71,11 +71,6 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 
 等等。 修改后保存，重启生效。
 
-**注意：**
-因使用人数过多，目前中文API设置了秘钥限制。在自行获取APIKey后，在配置文件的cnapi url末尾加上'&code=你的APIKey'，即可使用。参考[Issue 17](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/17#issuecomment-1336317427)
-
-日文和韩文的API目前正常。
-
 当插件版本更新时新配置将覆盖旧配置，如果不希望被覆盖可以在profile.toml中把版本调高。
 
 ## :speech_balloon: 常见问题
@@ -116,7 +111,10 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 
 ## :clipboard: 更新日志
 
-#### 2022.11.29 > v0.7.0 :fire:
+#### 2022.11.29 > v0.7.1 :fire:
+- 修复安装失败的BUG。
+
+#### 2022.11.29 > v0.7.0
 - 从__init__.py抽离一些配置组成profile.toml配置文件，现在可以自动从github上抓取url等配置的更新了。
 
 #### 2022.10.11 > v0.6.0
