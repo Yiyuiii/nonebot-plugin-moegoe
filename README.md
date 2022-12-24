@@ -2,16 +2,18 @@
  * @Author         : yiyuiii
  * @Date           : 2022-10-11 20:00:00
  * @LastEditors    : yiyuiii
- * @LastEditTime   : 2022-11-29 20:00:00
+ * @LastEditTime   : 2022-12-24 20:00:00
  * @Description    : None
  * @GitHub         : https://github.com/yiyuiii
 -->
 
 <!-- markdownlint-disable MD033 MD036 MD041 -->
 
-<p align="center">
-  <a href="https://v2.nonebot.dev/"><img src="https://v2.nonebot.dev/logo.png" width="200" height="200" alt="nonebot"></a>
-</p>
+<div align="center">
+  <a href="https://v2.nonebot.dev/store"><img src="https://github.com/A-kirami/nonebot-plugin-template/blob/resources/nbp_logo.png" width="180" height="180" alt="NoneBotPluginLogo"></a>
+  <br>
+  <p><img src="https://github.com/A-kirami/nonebot-plugin-template/blob/resources/NoneBotPlugin.svg" width="240" alt="NoneBotPluginText"></p>
+</div>
 
 <div align="center">
 
@@ -62,7 +64,7 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 <audio src="https://moegoe.azurewebsites.net/api/speakkr?text=hello!&id=0"></audio>
 </p> -->
 
-## :gear: 配置方法
+## :wrench: 配置方法
 
 在插件初次联网成功运行后，可以发现 BOTROOT/data/moegoe/ 路径下有profile.toml文件，其中可以配置
 
