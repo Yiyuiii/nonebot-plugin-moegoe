@@ -2,7 +2,7 @@
  * @Author         : yiyuiii
  * @Date           : 2022-10-11 20:00:00
  * @LastEditors    : yiyuiii
- * @LastEditTime   : 2022-12-24 20:00:00
+ * @LastEditTime   : 2022-12-25 20:00:00
  * @Description    : None
  * @GitHub         : https://github.com/yiyuiii
 -->
@@ -118,7 +118,7 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 
 ## :clipboard: 更新日志
 
-#### 2022.12.24 > v0.7.3 :fire:
+#### 2022.12.25 > v0.7.4 :fire:
 - 应官方要求升级包依赖版本。
 
 #### 2022.12.18 > v0.7.1
