@@ -74,7 +74,7 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 等等。 修改后保存，重启生效。
 
 **注意：**
-因使用人数过多，目前中文API设置了秘钥限制。在自行获取APIKey后，在配置文件的cnapi url末尾引号前加上`&code=你的APIKey`，即可使用。参考[Issue 17](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/17#issuecomment-1336317427)
+因使用人数过多，目前中文API设置了秘钥限制。在自行获取APIKey后，在配置文件的cnapi url末尾`"`前加上`&code=你的APIKey`，即可使用。参考[Issue 17](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/17#issuecomment-1336317427)
 
 日文和韩文的API目前正常。
 
