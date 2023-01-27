@@ -1,4 +1,4 @@
-version = "0.7.1"
+version = "0.7.5"
 priority = 5
 
 [plugin_meta]
@@ -17,6 +17,9 @@ author = "yiyuiii <yiyuiii@foxmail.com>"
 [download]
 profile_url = "https://raw.githubusercontent.com/Yiyuiii/nonebot-plugin-moegoe/master/nonebot_plugin_moegoe/profile.toml"
 proxy_url = "https://ghproxy.com/"
+
+[api]
+output_format = "record"  # record(默认):回复语音; link:回复语音链接; share:回复语音链接分享(url不稳定)
 
 [jpapi]
 url = "https://moegoe.azurewebsites.net/api/speak?text=${text}&id=${id}"

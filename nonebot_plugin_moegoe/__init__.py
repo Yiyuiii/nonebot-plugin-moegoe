@@ -26,7 +26,7 @@ if profileDict is None:
 
 
 def profilePreprocess():
-    global jpapi, jp2api, krapi, cnapi, jp_dict, jp2_dict, kr_dict, cn_dict
+    global jpapi, jp2api, krapi, cnapi, jp_dict, jp2_dict, kr_dict, cn_dict, output_format
     jpapi = Template(profileDict['jpapi']['url'])
     jp2api = Template(profileDict['jp2api']['url'])
     krapi = Template(profileDict['krapi']['url'])
@@ -38,6 +38,7 @@ def profilePreprocess():
                  (cn_dict, profileDict['cnapi']['order'])):
         for i, n in enumerate(l):
             d[n] = i
+    output_format = profileDict['api']['output_format']
 
 
 @driver.on_startup
@@ -83,25 +84,32 @@ async def get_record(url):
     voice = resp.content
     return MessageSegment.record(voice)
 
+async def get_MessageSegment(url, name, msg):
+    if output_format == "link":
+        return MessageSegment.text(url)
+    elif output_format == "share":  # Windows TIM端的url会缺失&，原因不明
+        return MessageSegment.share(url=url, title=name+'说...', content=msg, image='')
+    else:
+        return await get_record(url)
 
-async def jp_func(msg, name=profileDict['jpapi']['order'][0]):
+async def jp_func(msg, name=profileDict['jpapi']['order'][0], output_format=output_format):
     url = jpapi.substitute(text=msg, id=jp_dict[name])
-    return await get_record(url)
+    return await get_MessageSegment(url, name, msg)
 
 
-async def jp2_func(msg, name=profileDict['jp2api']['order'][0]):
+async def jp2_func(msg, name=profileDict['jp2api']['order'][0], output_format=output_format):
     url = jp2api.substitute(text=msg, id=jp2_dict[name])
-    return await get_record(url)
+    return await get_MessageSegment(url, name, msg)
 
 
-async def kr_func(msg, name=profileDict['krapi']['order'][0]):
+async def kr_func(msg, name=profileDict['krapi']['order'][0], output_format=output_format):
     url = krapi.substitute(text=msg, id=kr_dict[name])
-    return await get_record(url)
+    return await get_MessageSegment(url, name, msg)
 
 
-async def cn_func(msg, name=profileDict['cnapi']['order'][0]):
+async def cn_func(msg, name=profileDict['cnapi']['order'][0], output_format=output_format):
     url = cnapi.substitute(text=msg, id=cn_dict[name])
-    return await get_record(url)
+    return await get_MessageSegment(url, name, msg)
 
 
 jp_cmd = on_regex(profileDict['jpapi']['regex'], block=True, priority=profileDict['priority'])
