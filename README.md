@@ -64,7 +64,7 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 <audio src="https://moegoe.azurewebsites.net/api/speakkr?text=hello!&id=0"></audio>
 </p> -->
 
-**在聊天中输入: **`moegoe load` 可以在线更新profile。
+**在聊天中输入:**  `moegoe load` 可以在线更新profile。
 
 ## :wrench: 配置方法
 
