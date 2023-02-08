@@ -2,7 +2,7 @@
  * @Author         : yiyuiii
  * @Date           : 2022-10-11 20:00:00
  * @LastEditors    : yiyuiii
- * @LastEditTime   : 2022-12-25 20:00:00
+ * @LastEditTime   : 2023-02-08 11:00:00
  * @Description    : None
  * @GitHub         : https://github.com/yiyuiii
 -->
@@ -44,7 +44,7 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 
 **在聊天中输入:**
 
-- **让**[派蒙|凯亚|安柏|丽莎|琴|香菱|枫原万叶|迪卢克|温迪|可莉|早柚|托马|芭芭拉|优菈|云堇|钟离|魈|凝光|雷电将军|北斗|甘雨|七七|刻晴|神里绫华|雷泽|神里绫人|罗莎莉亚|阿贝多|八重神子|宵宫|荒泷一斗|九条裟罗|夜兰|珊瑚宫心海|五郎|达达利亚|莫娜|班尼特|申鹤|行秋|烟绯|久岐忍|辛焱|砂糖|胡桃|重云|菲谢尔|诺艾尔|迪奥娜|鹿野院平藏]**说**(中文)
+- **让**[派蒙|空|荧|阿贝多|枫原万叶|温迪|八重神子|纳西妲|钟离|诺艾尔|凝光|托马|北斗|莫娜|荒泷一斗|提纳里|芭芭拉|艾尔海森|雷电将军|赛诺|琴|班尼特|五郎|神里绫华|迪希雅|夜兰|辛焱|安柏|宵宫|云堇|妮露|烟绯|鹿野院平藏|凯亚|达达利亚|迪卢克|可莉|早柚|香菱|重云|刻晴|久岐忍|珊瑚宫心海|迪奥娜|戴因斯雷布|魈|神里绫人|丽莎|优菈|凯瑟琳|雷泽|菲谢尔|九条裟罗|甘雨|行秋|胡桃|迪娜泽黛|柯莱|申鹤|砂糖|萍姥姥|奥兹|罗莎莉亚|式大将|哲平|坎蒂丝|托克|留云借风真君|昆钧|塞琉斯|多莉|大肉丸|莱依拉|散兵|拉赫曼|杜拉夫|阿守|玛乔丽|纳比尔|海芭夏|九条镰治|阿娜耶|阿晃|阿扎尔|七七|博士|白术|埃洛伊|大慈树王|女士|丽塔|失落迷迭|缭乱星棘|伊甸|伏特加女孩|狂热蓝调|莉莉娅|萝莎莉娅|八重樱|八重霞|卡莲|第六夜想曲|卡萝尔|姬子|极地战刃|布洛妮娅|次生银翼|理之律者|迷城骇兔|希儿|魇夜星渊|黑希儿|帕朵菲莉丝|天元骑英|幽兰黛尔|德丽莎|月下初拥|朔夜观星|暮光骑士|明日香|李素裳|格蕾修|梅比乌斯|渡鸦|人之律者|爱莉希雅|爱衣|天穹游侠|琪亚娜|空之律者|薪炎之律者|云墨丹心|符华|识之律者|维尔薇|芽衣|雷之律者|阿波尼亚]**说**(中文)
 - **让**[宁宁|爱瑠|芳乃|茉子|丛雨|小春|七海|妃爱|华乃|亚澄|诗樱|天梨|里|广梦|莉莉子]**说日语：**(日语)
 - **让**[Sua|Mimiru|Arin|Yeonhwa|Yuhwa|Seonbae]**说韩语：**(韩语)
 
@@ -57,12 +57,14 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 **Bot返回语音**
 
 <!-- <p align="center">
-  <audio src="https://genshin.azurewebsites.net/api/speak?format=mp3&text=你好！旅行者。&id=0"></audio>
+  <audio src="https://yuanshenai.azurewebsites.net/api?speaker=派蒙&text=你好！旅行者。&format=mp3&length=1&noise=0.6&noisew=0.8"></audio>
 
 <audio src="https://moegoe.azurewebsites.net/api/speak?text=hello!&id=0"></audio>
 
 <audio src="https://moegoe.azurewebsites.net/api/speakkr?text=hello!&id=0"></audio>
 </p> -->
+
+**在聊天中输入: **`moegoe load` 可以在线更新profile。
 
 ## :wrench: 配置方法
 
@@ -74,7 +76,10 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 等等。 修改后保存，重启生效。
 
 **注意：**
-因使用人数过多，目前中文API设置了秘钥限制。在自行获取APIKey后，在配置文件的cnapi url末尾`"`前加上`&code=你的APIKey`，即可使用。参考[Issue 17](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/17#issuecomment-1336317427)
+
+yuanshenai中文API暂时没有秘钥限制。
+
+因使用人数过多，genshin中文API设置了秘钥限制。在自行获取APIKey后，在配置文件的cnapi url末尾`"`前加上`&code=你的APIKey`，即可使用。参考[Issue 17](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/17#issuecomment-1336317427)
 
 日文和韩文的API目前正常。
 
@@ -118,7 +123,14 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 
 ## :clipboard: 更新日志
 
-#### 2023.01.27 > v0.7.5 :fire:
+#### 2023.02.08 > v0.7.6 :fire:
+
+- 更新了新的中文api：yuanshenai.azurewebsites.net，目前免费使用。该api支持更多角色。
+- 增加了更多api配置选项，如果url中存在对应空位则生效，目前可以在profile.toml中修改。
+- 更新profile.toml时自动将原有文件备份为profile.bak。
+- 加入在线更新profile的指令 moegoe load。
+
+#### 2023.01.27 > v0.7.5 ​
 
 - 增加了回复形式的设置，详见profile.toml中[api]一栏。
 

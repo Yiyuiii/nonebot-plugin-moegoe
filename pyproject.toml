@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot-plugin-moegoe"
-version = "0.7.5"
+version = "0.7.6"
 description = "日韩中 VITS 模型拟声"
 license = "MIT"
 authors = ["yiyuiii <yiyuiii@foxmail.com>"]
