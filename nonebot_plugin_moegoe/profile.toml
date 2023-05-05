@@ -44,8 +44,8 @@ order = ["Sua", "Mimiru", "Arin", "Yeonhwa", "Yuhwa", "Seonbae"]
 regex = "^让(Sua|Mimiru|Arin|Yeonhwa|Yuhwa|Seonbae)说(?:韩语|韩文|韩国语)(?:：|:)(.+)$"
 
 [cnapi]
-url = "https://yuanshenai.azurewebsites.net/api?speaker=${speaker}&text=${text}&format=${format}&length=${length}&noise=${noise}&noisew=${noisew}"
-# url = "https://genshin.azurewebsites.net/api/speak?format=mp3&text=${text}&id=${id}"  # 需要apikey
+# url = "https://yuanshenai.azurewebsites.net/api?speaker=${speaker}&text=${text}&format=${format}&length=${length}&noise=${noise}&noisew=${noisew}"
+url = "https://genshin.azurewebsites.net/api/speak?format=mp3&text=${text}&id=${id}"  # 需要apikey
 voice_format = "mp3"
 length = 1
 noise = 0.6
