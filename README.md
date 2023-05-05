@@ -2,7 +2,7 @@
  * @Author         : yiyuiii
  * @Date           : 2022-10-11 20:00:00
  * @LastEditors    : yiyuiii
- * @LastEditTime   : 2023-02-08 11:00:00
+ * @LastEditTime   : 2023-05-05 11:00:00
  * @Description    : None
  * @GitHub         : https://github.com/yiyuiii
 -->
@@ -77,8 +77,6 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 
 **注意：**
 
-yuanshenai中文API暂时没有秘钥限制。
-
 因使用人数过多，genshin中文API设置了秘钥限制。在自行获取APIKey后，在配置文件的cnapi url末尾`"`前加上`&code=你的APIKey`，即可使用。参考[Issue 17](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/17#issuecomment-1336317427)
 
 日文和韩文的API目前正常。
@@ -125,7 +123,7 @@ yuanshenai中文API暂时没有秘钥限制。
 
 #### 2023.02.08 > v0.7.6 :fire:
 
-- 更新了新的中文api：yuanshenai.azurewebsites.net，目前免费使用。该api支持更多角色。
+- 更新了新的中文api：yuanshenai.azurewebsites.net **（目前已失效）**
 - 增加了更多api配置选项，如果url中存在对应空位则生效，目前可以在profile.toml中修改。
 - 更新profile.toml时自动将原有文件备份为profile.bak。
 - 加入在线更新profile的指令 moegoe load。
