@@ -130,7 +130,7 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 - 更新profile.toml时自动将原有文件备份为profile.bak。
 - 加入在线更新profile的指令 moegoe load。
 
-#### 2023.01.27 > v0.7.5 ​
+#### 2023.01.27 > v0.7.5 
 
 - 增加了回复形式的设置，详见profile.toml中[api]一栏。
 
