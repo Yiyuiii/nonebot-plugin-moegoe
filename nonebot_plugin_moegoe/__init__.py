@@ -55,7 +55,8 @@ async def update():
 
     newProfileDict = tomllib.loads(profileData.decode('utf-8'))
     if versionGreater(newProfileDict['version'], profileDict['version']):
-        os.rename(profilePath, bakProfilePath)
+        if profilePath.exists():
+            os.rename(profilePath, bakProfilePath)
         write_file(profilePath, profileData)
         profileDict = newProfileDict
         profilePreprocess()
