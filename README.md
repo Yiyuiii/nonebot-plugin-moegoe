@@ -2,7 +2,7 @@
  * @Author         : yiyuiii
  * @Date           : 2022-10-11 20:00:00
  * @LastEditors    : yiyuiii
- * @LastEditTime   : 2023-06-17 11:00:00
+ * @LastEditTime   : 2023-08-29 11:00:00
  * @Description    : None
  * @GitHub         : https://github.com/yiyuiii
 -->
@@ -42,20 +42,20 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 
 **在聊天中输入:**
 
-- **让**[派蒙|凯亚|安柏|丽莎|琴|香菱|枫原万叶|迪卢克|温迪|可莉|早柚|托马|芭芭拉|优菈|云堇|钟离|魈|凝光|雷电将军|北斗|甘雨|七七|刻晴|神里绫华|戴因斯雷布|雷泽|神里绫人|罗莎莉亚|阿贝多|八重神子|宵宫|荒泷一斗|九条裟罗|夜兰|珊瑚宫心海|五郎|散兵|女士|达达利亚|莫娜|班尼特|申鹤|行秋|烟绯|久岐忍|辛焱|砂糖|胡桃|重云|菲谢尔|诺艾尔|迪奥娜|鹿野院平藏]**说**(中文)
+- **让**[丹恒|克拉拉|穹|「信使」|史瓦罗|彦卿|晴霓|杰帕德|素裳|绿芙蓉|罗刹|艾丝妲|黑塔|丹枢|希露瓦|白露|费斯曼|停云|可可利亚|景元|螺丝咕姆|青镞|公输师傅|卡芙卡|大毫|驭空|半夏|奥列格|娜塔莎|桑博|瓦尔特|阿兰|伦纳德|佩拉|卡波特|帕姆|帕斯卡|青雀|三月七|刃|姬子|布洛妮娅|希儿|星|符玄|虎克|银狼|镜流|「博士」|「大肉丸」|九条裟罗|佐西摩斯|刻晴|博易|卡维|可莉|嘉玛|埃舍尔|塔杰·拉德卡尼|大慈树王|宵宫|康纳|影|枫原万叶|欧菲妮|玛乔丽|珊瑚|田铁嘴|砂糖|神里绫华|罗莎莉亚|荒泷一斗|莎拉|迪希雅|钟离|阿圆|阿娜耶|阿拉夫|雷泽|香菱|龙二|「公子」|「白老先生」|优菈|凯瑟琳|哲平|夏洛蒂|安柏|巴达维|式大将|斯坦利|毗伽尔|海妮耶|爱德琳|纳西妲|老孟|芙宁娜|阿守|阿祇|丹吉尔|丽莎|五郎|元太|克列门特|克罗索|北斗|埃勒曼|天目十五|奥兹|恶龙|早柚|杜拉夫|松浦|柊千里|甘雨|石头|纯水精灵？|羽生田千鹤|莱依拉|菲谢尔|言笑|诺艾尔|赛诺|辛焱|迪娜泽黛|那维莱特|八重神子|凯亚|吴船长|埃德|天叔|女士|恕筠|提纳里|派蒙|流浪者|深渊使徒|玛格丽特|珐露珊|琴|瑶瑶|留云借风真君|绮良良|舒伯特|荧|莫娜|行秋|迈勒斯|阿佩普|鹿野奈奈|七七|伊迪娅|博来|坎蒂丝|埃尔欣根|埃泽|塞琉斯|夜兰|常九爷|悦|戴因斯雷布|笼钓瓶一心|纳比尔|胡桃|艾尔海森|艾莉丝|菲米尼|蒂玛乌斯|迪奥娜|阿晃|阿洛瓦|陆行岩本真蕈·元素生命|雷电将军|魈|鹿野院平藏|「女士」|「散兵」|凝光|妮露|娜维娅|宛烟|慧心|托克|托马|掇星攫辰天君|旁白|浮游水蕈兽·元素生命|烟绯|玛塞勒|百闻|知易|米卡|西拉杰|迪卢克|重云|阿扎尔|霍夫曼|上杉|久利须|嘉良|回声海螺|多莉|安西|德沃沙克|拉赫曼|林尼|查尔斯|深渊法师|温迪|爱贝尔|珊瑚宫心海|班尼特|琳妮特|申鹤|神里绫人|艾伯特|萍姥姥|萨赫哈蒂|萨齐因|阿尔卡米|阿贝多|anzai|久岐忍|九条镰治|云堇|伊利亚斯|埃洛伊|塞塔蕾|拉齐|昆钧|柯莱|沙扎曼|海芭夏|白术|空|艾文|芭芭拉|莫塞伊思|莺儿|达达利亚|迈蒙|长生|阿巴图伊|陆景和|莫弈|夏彦|左然]**说**(中文)
 - **让**[宁宁|爱瑠|芳乃|茉子|丛雨|小春|七海|妃爱|华乃|亚澄|诗樱|天梨|里|广梦|莉莉子]**说日语：**(日语)
 - **让**[Sua|Mimiru|Arin|Yeonhwa|Yuhwa|Seonbae]**说韩语：**(韩语)
 
 例：
 
-- [让派蒙说你好！旅行者。](https://genshin.azurewebsites.net/api/speak?format=mp3&text=你好！旅行者。&id=0)
+- [让派蒙说你好！旅行者。](https://genshinvoice.top/api?speaker=%E6%B4%BE%E8%92%99&text=%E4%BD%A0%E5%A5%BD%EF%BC%81%E6%97%85%E8%A1%8C%E8%80%85%E3%80%82&format=wav&length=1&noise=0.5&noisew=0.9&sdp_ratio=0.2)
 - [让宁宁说日语：hello.](https://moegoe.azurewebsites.net/api/speak?text=hello!&id=0)
 - [让Sua说韩语：hello.](https://moegoe.azurewebsites.net/api/speakkr?text=hello!&id=0)
 
 **Bot返回语音**
 
 <!-- <p align="center">
-  <audio src="https://yuanshenai.azurewebsites.net/api?speaker=派蒙&text=你好！旅行者。&format=mp3&length=1&noise=0.6&noisew=0.8"></audio>
+  <audio src="https://genshinvoice.top/api?speaker=%E6%B4%BE%E8%92%99&text=%E4%BD%A0%E5%A5%BD%EF%BC%81%E6%97%85%E8%A1%8C%E8%80%85%E3%80%82&format=wav&length=1&noise=0.5&noisew=0.9&sdp_ratio=0.2"></audio>
 
 <audio src="https://moegoe.azurewebsites.net/api/speak?text=hello!&id=0"></audio>
 
@@ -75,7 +75,9 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 
 **注意：**
 
-因使用人数过多，genshin中文API设置了秘钥限制。在自行获取APIKey后，在配置文件的cnapi url末尾`"`前加上`&code=你的APIKey`，即可使用。参考[Issue 17](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/17#issuecomment-1336317427)
+目前中文默认使用新的免费api：https://genshinvoice.top/。
+
+原付费api也可继续使用，在自行获取APIKey后，在配置文件的cnapi url末尾`"`前加上`&code=你的APIKey`，即可使用。参考[Issue 17](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/17#issuecomment-1336317427)
 
 日文和韩文的API目前正常。
 
@@ -96,7 +98,7 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 
 [Issue 2](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/2) | [Issue 4](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/4)
 
-- 第一种情况：**中文语音api对输入要求很严**，只支持中文字符和几个标点符号，输入如果包含api无法处理的字符就会无法生成语音，包括英文、叠词、奇怪标点符号等就大概率不行。
+- 第一种情况：输入如果包含api无法处理的字符就会无法生成语音，请排查英文、叠词、奇怪标点符号等。
 - 第二种情况：当后台在报`encode silk failed: convert pcm file error: exec: "ffmpeg": executable file not found in %PATH% `错误时，表示go-cqhttp编码音频所依赖的ffmpeg包没有被安装，所以不能发送音频。**请自行安装ffmpeg**。*（不过ffmpeg可能不是必须的。如果有人在不安装ffmpeg时能正常使用，请向我反馈，这一点还没有经过测试。）*
 - 第三种情况：**本插件默认优先级为5**，若有其它的插件优先级比5强，且该插件有block截断，则本插件可能无法收到并处理消息。目前需要自行调整插件的优先级。
 </details>
@@ -104,7 +106,7 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 <details>
 <summary>API不能生成较长语音</summary>
 
-目前API生成较长语音的速度很慢（从数十秒到数分钟），为避免该类请求的并发造成资源阻塞，代码中限制了请求时长，可自行修改。
+一些API生成较长语音的速度很慢（从数十秒到数分钟），为避免该类请求的并发造成资源阻塞，代码中限制了请求时长，可自行修改。
 
 `resp = await client.get(url, timeout=120)`
 </details>
@@ -119,7 +121,11 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 
 ## :clipboard: 更新日志
 
-#### 2023.06.17 > v0.7.8 :fire:
+#### 2023.08.29 > v0.8.0 :fire:
+
+- 更新了新的免费cnapi，和新的cnapi角色名单。
+
+#### 2023.06.17 > v0.7.8
 
 - 更新了cnapi的角色名单，并加入了一些api参数。
 
