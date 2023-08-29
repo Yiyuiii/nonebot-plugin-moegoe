@@ -21,6 +21,8 @@ _✨ 日韩中 VITS 模型拟声 by fumiama✨_
 
 搬运自ZeroBot-Plugin仓库：https://github.com/FloatTech/ZeroBot-Plugin/tree/master/plugin/moegoe
 
+https://github.com/fumiama/MoeGoe/tree/genshin
+
 </div>
 
 <p align="center">
