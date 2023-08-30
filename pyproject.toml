@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "nonebot-plugin-moegoe"
-version = "0.7.8"
-description = "日韩中 VITS 模型拟声"
+version = "0.8.1"
+description = "VITS AI合成原神角色语音"
 license = "MIT"
 authors = ["yiyuiii <yiyuiii@foxmail.com>"]
 readme = "README.md"

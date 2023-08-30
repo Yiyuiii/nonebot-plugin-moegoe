@@ -1,15 +1,17 @@
-from typing import Tuple, Any
+from typing import Tuple, Any, Optional
+from collections import defaultdict
 from string import Template
 from pathlib import Path
+import re
 import rtoml as tomllib
 import httpx
-import os
 from nonebot.log import logger
 from nonebot.matcher import Matcher
 from nonebot.params import RegexGroup, CommandArg
 from nonebot.plugin import PluginMetadata, on_regex, on_command
 from nonebot.adapters.onebot.v11 import MessageSegment, ActionFailed
 from nonebot import get_driver
+from .utils import download_url, write_file, versionGreater
 
 driver = get_driver()
 
@@ -17,35 +19,20 @@ dataPath = Path() / 'data' / 'moegoe'
 profilePath = dataPath / 'profile.toml'
 bakProfilePath = dataPath / 'profile.bak'
 
-profileDict = None
+profileDict = tomllib.load(Path(__file__).parent / 'profile.toml')
+saved_profileDict = None
 if profilePath.exists():
     try:
-        profileDict = tomllib.load(profilePath)
+        saved_profileDict = tomllib.load(profilePath)
     except Exception as e:
         logger.warning(f"Error loading {profilePath}, {str(e)}.")
-if profileDict is None:
-    profileDict = tomllib.load(Path(__file__).parent / 'profile.toml')
-
-
-def profilePreprocess():
-    global jpapi, jp2api, krapi, cnapi, jp_dict, jp2_dict, kr_dict, cn_dict
-    jpapi = Template(profileDict['jpapi']['url'])
-    jp2api = Template(profileDict['jp2api']['url'])
-    krapi = Template(profileDict['krapi']['url'])
-    cnapi = Template(profileDict['cnapi']['url'])
-    jp_dict, jp2_dict, kr_dict, cn_dict = [dict() for _ in range(4)]
-    for d, l in ((jp_dict, profileDict['jpapi']['order']),
-                 (jp2_dict, profileDict['jp2api']['order']),
-                 (kr_dict, profileDict['krapi']['order']),
-                 (cn_dict, profileDict['cnapi']['order'])):
-        for i, n in enumerate(l):
-            d[n] = i
+if saved_profileDict and versionGreater(saved_profileDict['version'], profileDict['version']):
+    profileDict = saved_profileDict
 
 
 @driver.on_startup
 async def update():
     global profileDict
-    from .utils import download_url, write_file, versionGreater
     profileData = await download_url(profileDict['download']['proxy_url'] + profileDict['download']['profile_url'])
     if profileData is None:
         profileData = await download_url(profileDict['download']['profile_url'])
@@ -63,6 +50,24 @@ async def update():
         logger.info(f"moegoe profile updated to version {profileDict['version']}.")
     else:
         logger.info("moegoe profile checked.")
+
+
+def profilePreprocess():
+    global jpapi, jp2api, krapi, cnapi, jp_dict, jp2_dict, kr_dict, cn_dict, paramap_dict
+    jpapi = Template(profileDict['jpapi']['url'])
+    jp2api = Template(profileDict['jp2api']['url'])
+    krapi = Template(profileDict['krapi']['url'])
+    cnapi = Template(profileDict['cnapi']['url'])
+    jp_dict, jp2_dict, kr_dict, cn_dict = [defaultdict(lambda: -1) for _ in range(4)]  # 缺省值-1
+    for d, l in ((jp_dict, profileDict['jpapi']['order']),
+                 (jp2_dict, profileDict['jp2api']['order']),
+                 (kr_dict, profileDict['krapi']['order']),
+                 (cn_dict, profileDict['cnapi']['order'])):
+        for i, n in enumerate(l):
+            d[n] = i
+    paramap_dict = dict()
+    for v, k in profileDict['api']['para_dict']:
+        paramap_dict[k] = v
 
 
 __version__ = profileDict['version']
@@ -88,7 +93,7 @@ async def _(matcher: Matcher, args: Tuple[Any, ...] = CommandArg()):
     args = args.extract_plain_text().split()
     if 'load' in args:
         await update()
-        await matcher.finish('moegoe reloaded.')
+        await matcher.finish(f"moegoe reloaded, ver {profileDict['version']}.")
     else:
         await matcher.finish(f'moegoe命令：load->更新profile.')
 
@@ -118,27 +123,35 @@ def getApiConfigs(api_name):
                 break
     return config
 
-async def jp_func(msg, name=profileDict['jpapi']['order'][0], output_format=profileDict['api']['return_format']):
-    id = jp_dict[name] if name in jp_dict.keys() else -1
-    url = jpapi.substitute(text=msg, name=name, speaker=name, id=id, **getApiConfigs('jpapi'))
+async def jp_func(msg, name=profileDict['jpapi']['order'][0], output_format=profileDict['api']['return_format'], para_dict=dict()):
+    id = jp_dict[name]
+    paras = getApiConfigs('jpapi')
+    paras.update(para_dict)
+    url = jpapi.substitute(text=msg, name=name, speaker=name, id=id, **paras)
     return await get_MessageSegment(url, name, msg, output_format)
 
 
-async def jp2_func(msg, name=profileDict['jp2api']['order'][0], output_format=profileDict['api']['return_format']):
-    id = jp2_dict[name] if name in jp2_dict.keys() else -1
-    url = jp2api.substitute(text=msg, name=name, speaker=name, id=id, **getApiConfigs('jp2api'))
+async def jp2_func(msg, name=profileDict['jp2api']['order'][0], output_format=profileDict['api']['return_format'], para_dict=dict()):
+    id = jp2_dict[name]
+    paras = getApiConfigs('jp2api')
+    paras.update(para_dict)
+    url = jp2api.substitute(text=msg, name=name, speaker=name, id=id, **paras)
     return await get_MessageSegment(url, name, msg, output_format)
 
 
-async def kr_func(msg, name=profileDict['krapi']['order'][0], output_format=profileDict['api']['return_format']):
-    id = kr_dict[name] if name in kr_dict.keys() else -1
-    url = krapi.substitute(text=msg, name=name, speaker=name, id=id, **getApiConfigs('krapi'))
+async def kr_func(msg, name=profileDict['krapi']['order'][0], output_format=profileDict['api']['return_format'], para_dict=dict()):
+    id = kr_dict[name]
+    paras = getApiConfigs('krapi')
+    paras.update(para_dict)
+    url = krapi.substitute(text=msg, name=name, speaker=name, id=id, **paras)
     return await get_MessageSegment(url, name, msg, output_format)
 
 
-async def cn_func(msg, name=profileDict['cnapi']['order'][0], output_format=profileDict['api']['return_format']):
-    id = cn_dict[name] if name in cn_dict.keys() else -1
-    url = cnapi.substitute(text=msg, name=name, speaker=name, id=id, **getApiConfigs('cnapi'))
+async def cn_func(msg, name=profileDict['cnapi']['order'][0], output_format=profileDict['api']['return_format'], para_dict=dict()):
+    id = cn_dict[name]
+    paras = getApiConfigs('cnapi')
+    paras.update(para_dict)
+    url = cnapi.substitute(text=msg, name=name, speaker=name, id=id, **paras)
     return await get_MessageSegment(url, name, msg, output_format)
 
 
@@ -149,9 +162,11 @@ cn_cmd = on_regex(profileDict['cnapi']['regex'], block=True, priority=profileDic
 
 
 async def msg_process(matcher: Matcher, matched: Tuple[Any, ...], api_func):
-    name, msg = matched[0], matched[1]
+    assert len(matched) >= 4
+    name, _, para, msg = matched[0:4]
+    para_dict = para_process(para)
     try:
-        record = await api_func(msg=msg, name=name)
+        record = await api_func(msg=msg, name=name, para_dict=para_dict)
     except Exception as e:
         await matcher.finish('API调用失败：' + str(e) + '。或许输入字符不匹配语言。')
         return
@@ -159,6 +174,24 @@ async def msg_process(matcher: Matcher, matched: Tuple[Any, ...], api_func):
         await matcher.finish(record)
     except ActionFailed as e:
         await matcher.finish('语音发送失败：' + str(e))
+
+
+def para_process(para_str: Optional[str]):
+    para_dict = dict()
+    if para_str:
+        keywords = paramap_dict.keys()
+        pattern = '|'.join(map(re.escape, keywords))
+        parts = re.split(f'({pattern})', para_str)
+        cur_key = None
+        for part in parts:
+            if cur_key:
+                match = re.search(r'[-+]?\d*\.\d+|\d+', part)  # str转浮点数
+                if match:
+                    para_dict[paramap_dict[cur_key]] = float(match.group())
+                cur_key = None
+            elif part in keywords:
+                cur_key = part
+    return para_dict
 
 
 @jp_cmd.handle()
@@ -178,11 +211,13 @@ async def _(matcher: Matcher, matched: Tuple[Any, ...] = RegexGroup()):
 
 @cn_cmd.handle()
 async def _(matcher: Matcher, matched: Tuple[Any, ...] = RegexGroup()):
-    name, msg = matched[0], matched[1]
+    assert len(matched) >= 4
+    name, _, para, msg = matched[0:4]
+    para_dict = para_process(para)
     for en, cn in profileDict['cnapi']['replace']:
         msg = msg.replace(en, cn)
     try:
-        record = await cn_func(msg=msg, name=name)
+        record = await cn_func(msg=msg, name=name, para_dict=para_dict)
     except Exception as e:
         await matcher.finish('API调用失败：' + str(e) + '。或许输入字符不匹配语言。')
         return
