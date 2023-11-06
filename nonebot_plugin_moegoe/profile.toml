@@ -1,4 +1,4 @@
-version = "0.8.1"
+version = "0.8.2"
 priority = 5
 
 [plugin_meta]
@@ -45,7 +45,7 @@ order = ["Sua", "Mimiru", "Arin", "Yeonhwa", "Yuhwa", "Seonbae"]
 regex = "^让(Sua|Mimiru|Arin|Yeonhwa|Yuhwa|Seonbae)(以(.+))?说(?:韩语|韩文|韩国语)(?:：|:)(.+)$"
 
 [cnapi]
-url = "https://genshinvoice.top/api?speaker=${speaker}&text=${text}&format=wav&length=${length}&noise=${noise}&noisew=${noisew}&sdp_ratio=0.2"
+url = "https://genshinvoice.top/api?speaker=${speaker}_ZH&text=${text}&format=wav&length=${length}&noise=${noise}&noisew=${noisew}&sdp_ratio=0.2&language=ZH"
 # url = "https://genshin.azurewebsites.net/api/speak?format=mp3&text=${text}&id=${id}&length=${length}&noise=${noise}&noisew=${noisew}"  # 需要apikey
 voice_format = "mp3"
 length = 1  # 整体语速
