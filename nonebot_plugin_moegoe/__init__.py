@@ -170,6 +170,10 @@ jp_cmd = on_regex(profileDict['jpapi']['regex'], block=True, priority=profileDic
 jp2_cmd = on_regex(profileDict['jp2api']['regex'], block=True, priority=profileDict['priority'])
 kr_cmd = on_regex(profileDict['krapi']['regex'], block=True, priority=profileDict['priority'])
 cn_cmd = on_regex(profileDict['cnapi']['regex'], block=True, priority=profileDict['priority'])
+nationDict = profileDict['cnapi']['nation']
+langDict = profileDict['cnapi']['lang']
+nationDict.setdefault(None, 'ZH')
+langDict.setdefault(None, 'ZH')
 
 
 async def msg_process(matcher: Matcher, matched: Tuple[Any, ...], api_func):
@@ -225,8 +229,8 @@ async def _(matcher: Matcher, matched: Tuple[Any, ...] = RegexGroup()):
     assert len(matched) >= 6
     nation, name, _, para, lang, msg = matched[0:6]
     para_dict = para_process(para)
-    nation = profileDict['cnapi']['nation'].get(nation)
-    lang = profileDict['cnapi']['lang'].get(lang)
+    nation = nationDict.get(nation)
+    lang = langDict.get(lang)
     for en, cn in profileDict['cnapi']['replace']:
         msg = msg.replace(en, cn)
     try:
