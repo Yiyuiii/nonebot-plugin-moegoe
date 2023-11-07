@@ -95,8 +95,10 @@ async def _(matcher: Matcher, args: Tuple[Any, ...] = CommandArg()):
     if 'load' in args:
         await update()
         await matcher.finish(f"moegoe reloaded, ver {profileDict['version']}.")
+    elif 'list' in args:
+        await matcher.finish(f"genshinvoice可用角色：{profileDict['cnapi']['character_list']}")
     else:
-        await matcher.finish(f'moegoe命令：load->更新profile.')
+        await matcher.finish(f'moegoe命令：\nload->更新profile.\nlist->列出genshinvoice可用角色。')
 
 
 # api for other plugins
@@ -170,11 +172,10 @@ jp_cmd = on_regex(profileDict['jpapi']['regex'], block=True, priority=profileDic
 jp2_cmd = on_regex(profileDict['jp2api']['regex'], block=True, priority=profileDict['priority'])
 kr_cmd = on_regex(profileDict['krapi']['regex'], block=True, priority=profileDict['priority'])
 cn_cmd = on_regex(profileDict['cnapi']['regex'], block=True, priority=profileDict['priority'])
-nationDict = profileDict['cnapi']['nation']
-langDict = profileDict['cnapi']['lang']
-nationDict.setdefault(None, 'ZH')
-langDict.setdefault(None, 'ZH')
-
+nationDict = defaultdict(lambda : 'ZH')
+nationDict.update(profileDict['cnapi']['nation'])
+langDict = defaultdict(lambda : 'ZH')
+langDict.update(profileDict['cnapi']['lang'])
 
 async def msg_process(matcher: Matcher, matched: Tuple[Any, ...], api_func):
     assert len(matched) >= 4
@@ -183,7 +184,7 @@ async def msg_process(matcher: Matcher, matched: Tuple[Any, ...], api_func):
     try:
         record = await api_func(msg=msg, name=name, para_dict=para_dict)
     except Exception as e:
-        await matcher.finish('API调用失败：' + str(e) + '。或许输入字符不匹配语言。')
+        await matcher.finish('API调用失败：' + str(e) + '。原因可能是文本语言不匹配、API跑路。')
         return
     try:
         await matcher.finish(record)
@@ -229,14 +230,12 @@ async def _(matcher: Matcher, matched: Tuple[Any, ...] = RegexGroup()):
     assert len(matched) >= 6
     nation, name, _, para, lang, msg = matched[0:6]
     para_dict = para_process(para)
-    nation = nationDict.get(nation)
-    lang = langDict.get(lang)
     for en, cn in profileDict['cnapi']['replace']:
         msg = msg.replace(en, cn)
     try:
-        record = await cn_func(nation=nation, msg=msg, lang=lang, name=name, para_dict=para_dict)
+        record = await cn_func(nation=nationDict[nation], msg=msg, lang=langDict[lang], name=name, para_dict=para_dict)
     except Exception as e:
-        await matcher.finish('API调用失败：' + str(e) + '。或许输入字符不匹配语言。')
+        await matcher.finish('API调用失败：' + str(e) + '。原因可能是文本语言不匹配、角色名错误、API跑路。')
         return
     try:
         await matcher.finish(record)
