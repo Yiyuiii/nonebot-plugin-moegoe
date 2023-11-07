@@ -70,7 +70,9 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 </p> -->
 
 **在聊天中输入:**  `moegoe load` 可以在线更新profile。
+
 **在聊天中输入:**  `moegoe list` 可以看到cnapi角色列表（只有链接）。
+
 **在聊天中输入:**  `moegoe xx` 可以看到上述说明。
 
 ## :wrench: 配置方法
