@@ -88,6 +88,7 @@ profilePreprocess()
 # plugin commands
 plugin_cmd = on_command(profileDict['plugin']['cmd'], block=True, priority=profileDict['priority'])
 
+
 @plugin_cmd.handle()
 async def _(matcher: Matcher, args: Tuple[Any, ...] = CommandArg()):
     args = args.extract_plain_text().split()
@@ -97,6 +98,7 @@ async def _(matcher: Matcher, args: Tuple[Any, ...] = CommandArg()):
     else:
         await matcher.finish(f'moegoe命令：load->更新profile.')
 
+
 # api for other plugins
 async def get_record(url):
     async with httpx.AsyncClient() as client:
@@ -105,17 +107,21 @@ async def get_record(url):
     voice = resp.content
     return MessageSegment.record(voice)
 
+
 async def get_MessageSegment(url, name, msg, output_format):
     if output_format == "link":
         return MessageSegment.text(url)
     elif output_format == "share":  # Windows TIM端的url会缺失&，原因不明
-        return MessageSegment.share(url=url, title=name+'说...', content=msg, image='')
+        return MessageSegment.share(url=url, title=name + '说...', content=msg, image='')
     else:
         return await get_record(url)
 
+
 def getApiConfigs(api_name):
     config = dict()
-    for k,q,d in (('format', 'voice_format', 'mp3'), ('length','length', 1), ('noise','noise', 0.6), ('noisew','noisew', 0.8)):
+    for k, q, d in (
+            ('format', 'voice_format', 'mp3'), ('length', 'length', 1), ('noise', 'noise', 0.6),
+            ('noisew', 'noisew', 0.8)):
         config[k] = d
         for name in (api_name, 'api'):
             if q in profileDict[name].keys():
@@ -123,7 +129,9 @@ def getApiConfigs(api_name):
                 break
     return config
 
-async def jp_func(msg, name=profileDict['jpapi']['order'][0], output_format=profileDict['api']['return_format'], para_dict=dict()):
+
+async def jp_func(msg, name=profileDict['jpapi']['order'][0], output_format=profileDict['api']['return_format'],
+                  para_dict=dict()):
     id = jp_dict[name]
     paras = getApiConfigs('jpapi')
     paras.update(para_dict)
@@ -131,7 +139,8 @@ async def jp_func(msg, name=profileDict['jpapi']['order'][0], output_format=prof
     return await get_MessageSegment(url, name, msg, output_format)
 
 
-async def jp2_func(msg, name=profileDict['jp2api']['order'][0], output_format=profileDict['api']['return_format'], para_dict=dict()):
+async def jp2_func(msg, name=profileDict['jp2api']['order'][0], output_format=profileDict['api']['return_format'],
+                   para_dict=dict()):
     id = jp2_dict[name]
     paras = getApiConfigs('jp2api')
     paras.update(para_dict)
@@ -139,7 +148,8 @@ async def jp2_func(msg, name=profileDict['jp2api']['order'][0], output_format=pr
     return await get_MessageSegment(url, name, msg, output_format)
 
 
-async def kr_func(msg, name=profileDict['krapi']['order'][0], output_format=profileDict['api']['return_format'], para_dict=dict()):
+async def kr_func(msg, name=profileDict['krapi']['order'][0], output_format=profileDict['api']['return_format'],
+                  para_dict=dict()):
     id = kr_dict[name]
     paras = getApiConfigs('krapi')
     paras.update(para_dict)
@@ -147,11 +157,12 @@ async def kr_func(msg, name=profileDict['krapi']['order'][0], output_format=prof
     return await get_MessageSegment(url, name, msg, output_format)
 
 
-async def cn_func(msg, name=profileDict['cnapi']['order'][0], output_format=profileDict['api']['return_format'], para_dict=dict()):
+async def cn_func(msg, name=profileDict['cnapi']['order'][0], nation='ZH',
+                  output_format=profileDict['api']['return_format'], lang='ZH', para_dict=dict()):
     id = cn_dict[name]
     paras = getApiConfigs('cnapi')
     paras.update(para_dict)
-    url = cnapi.substitute(text=msg, name=name, speaker=name, id=id, **paras)
+    url = cnapi.substitute(text=msg, name=name, nation=nation, speaker=name, lang=lang, id=id, **paras)
     return await get_MessageSegment(url, name, msg, output_format)
 
 
@@ -211,13 +222,15 @@ async def _(matcher: Matcher, matched: Tuple[Any, ...] = RegexGroup()):
 
 @cn_cmd.handle()
 async def _(matcher: Matcher, matched: Tuple[Any, ...] = RegexGroup()):
-    assert len(matched) >= 4
-    name, _, para, msg = matched[0:4]
+    assert len(matched) >= 6
+    nation, name, _, para, lang, msg = matched[0:6]
     para_dict = para_process(para)
+    nation = profileDict['cnapi']['nation'].get(nation)
+    lang = profileDict['cnapi']['lang'].get(lang)
     for en, cn in profileDict['cnapi']['replace']:
         msg = msg.replace(en, cn)
     try:
-        record = await cn_func(msg=msg, name=name, para_dict=para_dict)
+        record = await cn_func(nation=nation, msg=msg, lang=lang, name=name, para_dict=para_dict)
     except Exception as e:
         await matcher.finish('API调用失败：' + str(e) + '。或许输入字符不匹配语言。')
         return
