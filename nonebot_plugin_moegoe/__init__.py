@@ -50,15 +50,15 @@ async def update():
     newProfileDict = tomllib.loads(profileData.decode("utf-8"))
     newVersion = parse(newProfileDict["version"])
     curVersion = parse(profileDict["version"])
-    if newVersion.micro > curVersion.micro:  # 只更新小版本，防止API不兼容
+    if newVersion.major > curVersion.major or (newVersion.major == curVersion.major and newVersion.minor > curVersion.minor):  # 有大版本更新
+        logger.info(f"moegoe profile has new version {newProfileDict['version']}, you may manual update this package via pip.")
+    elif newVersion.micro > curVersion.micro:  # 只更新小版本，防止API不兼容
         if profilePath.exists():
             profilePath.rename(bakProfilePath)
         write_file(profilePath, profileData)
         profileDict = newProfileDict
         profilePreprocess()
         logger.info(f"moegoe profile updated to version {profileDict['version']}.")
-    elif newVersion.major > curVersion.major or (newVersion.major == curVersion.major and newVersion.minor > curVersion.minor):  # 有大版本更新
-        logger.info(f"moegoe profile has new version {newProfileDict['version']}, you may manual update this package via pip.")
     else:
         logger.info("moegoe profile checked.")
 
