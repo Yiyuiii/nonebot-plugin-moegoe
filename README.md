@@ -52,7 +52,7 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 
 例：
 
-- [让派蒙说你好！旅行者。](https://genshinvoice.top/api?speaker=%E6%B4%BE%E8%92%99&text=%E4%BD%A0%E5%A5%BD%EF%BC%81%E6%97%85%E8%A1%8C%E8%80%85%E3%80%82&format=wav&length=1&noise=0.5&noisew=0.9&sdp_ratio=0.2)
+- [让派蒙说你好！旅行者。](https://genshinvoice.top/api?speaker=%E6%B4%BE%E8%92%99_ZH&text=%E4%BD%A0%E5%A5%BD%EF%BC%81%E6%97%85%E8%A1%8C%E8%80%85%E3%80%82&format=wav&length=1&noise=0.5&noisew=0.9&sdp_ratio=0.2&language=ZH)
 - [让英配派蒙以情绪0.8长度1.8顿挫0.7说中文你好！旅行者。](https://genshinvoice.top/api?speaker=%E6%B4%BE%E8%92%99_EN&text=%E4%BD%A0%E5%A5%BD%EF%BC%81%E6%97%85%E8%A1%8C%E8%80%85%E3%80%82&format=wav&length=1.8&noise=0.8&noisew=0.7&sdp_ratio=0.2&language=ZH)
 - [让宁宁说日语：hello.](https://moegoe.azurewebsites.net/api/speak?text=hello!&id=0)
 - [让Sua说韩语：hello.](https://moegoe.azurewebsites.net/api/speakkr?text=hello!&id=0)
@@ -60,7 +60,7 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 **Bot返回语音**
 
 <!-- <p align="center">
-<audio src="https://genshinvoice.top/api?speaker=%E6%B4%BE%E8%92%99&text=%E4%BD%A0%E5%A5%BD%EF%BC%81%E6%97%85%E8%A1%8C%E8%80%85%E3%80%82&format=wav&length=1&noise=0.5&noisew=0.9&sdp_ratio=0.2"></audio>
+<audio src="https://genshinvoice.top/api?speaker=%E6%B4%BE%E8%92%99_ZH&text=%E4%BD%A0%E5%A5%BD%EF%BC%81%E6%97%85%E8%A1%8C%E8%80%85%E3%80%82&format=wav&length=1&noise=0.5&noisew=0.9&sdp_ratio=0.2&language=ZH"></audio>
 
 <audio src="https://genshinvoice.top/api?speaker=%E6%B4%BE%E8%92%99_EN&text=%E4%BD%A0%E5%A5%BD%EF%BC%81%E6%97%85%E8%A1%8C%E8%80%85%E3%80%82&format=wav&length=1.8&noise=0.8&noisew=0.7&sdp_ratio=0.2&language=ZH"></audio>
 
