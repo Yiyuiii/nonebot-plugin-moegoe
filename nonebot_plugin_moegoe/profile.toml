@@ -1,4 +1,4 @@
-version = "0.9.0"
+version = "0.9.1"
 priority = 5
 
 [plugin_meta]
@@ -19,7 +19,7 @@ cmd = "moegoe"
 
 [download]
 profile_url = "https://raw.githubusercontent.com/Yiyuiii/nonebot-plugin-moegoe/master/nonebot_plugin_moegoe/profile.toml"
-proxy_url = "https://ghproxy.com/"
+proxy_url = "https://mirror.ghproxy.com/"
 
 [api]
 return_format = "record"  # record(默认):回复语音; link:回复语音链接; share:回复语音链接分享(url不稳定)
@@ -51,7 +51,7 @@ voice_format = "mp3"
 length = 1  # 整体语速
 noise = 0.6  # 感情：控制感情变化和稳定程度
 noisew = 0.8  #  音素长度：控制音节发音长度变化程度
-order = []
+order = ["派蒙"]
 regex = "^让(中配|英配|日配)?([^0-9.]+)(以(.+))?说(国语|汉语|汉文|中文|Chinese|英语|英文|English|日语|日文|日本语|Japanese)?(?:[：|:]*)(.+)$"
 replace = [[',', '，'], ['.', '。'], ['!', '！'], ['?', '？'], ['0', '零'], ['1', '一'], ['2', '二'], ['3', '三'], ['4', '四'], ['5', '五'], ['6', '六'], ['7', '七'], ['8', '八'], ['9', '九'], ]
 nation = {'中配'='ZH','英配'='EN','日配'='JP'}
