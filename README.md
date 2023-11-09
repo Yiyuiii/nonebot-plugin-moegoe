@@ -17,7 +17,7 @@
 
 # nonebot-plugin-moegoe
 
-用API让原神角色为你说话！
+用API让原神角色说话！
 
 _✨ AI（VITS）合成原神角色语音 by fumiama✨_
 
