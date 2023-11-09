@@ -17,7 +17,9 @@
 
 # nonebot-plugin-moegoe
 
-_✨ VITS AI合成原神角色语音 by fumiama✨_
+用API让游戏角色为你说话！
+
+_✨ AI（VITS）合成原神角色语音 by fumiama✨_
 
 搬运自ZeroBot-Plugin仓库：https://github.com/FloatTech/ZeroBot-Plugin/tree/master/plugin/moegoe
 
