@@ -1,8 +1,8 @@
 <!--
  * @Author         : yiyuiii
- * @Date           : 2022-10-11 20:00:00
+ * @Date           : 2022-10-11 00:00:00
  * @LastEditors    : yiyuiii
- * @LastEditTime   : 2023-11-07 11:00:00
+ * @LastEditTime   : 2023-11-09 00:00:00
  * @Description    : None
  * @GitHub         : https://github.com/yiyuiii
 -->
@@ -134,10 +134,11 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 
 ## :clipboard: 更新日志
 
-#### 2023.11.07 > v0.9.0 :fire:
+#### 2023.11.09 > v0.9.1 :fire:
 
 - 跟随genshinvoice.top更新cnapi以及相关处理流程。该API现在支持海量配音角色和中日英三种语言！
 - 优化版本控制代码和逻辑，考虑到minor版本更新经常带来profile和旧版本代码的不兼容问题，今后只会自动更新micro新版本的profile。
+- 更新镜像站为 https://mirror.ghproxy.com/
 
 #### 2023.08.30 > v0.8.1
 
