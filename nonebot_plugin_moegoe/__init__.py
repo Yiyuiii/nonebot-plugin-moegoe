@@ -226,7 +226,7 @@ async def cn_func(
             gradioParas.append(paras[k])
         stat, wav_path = gradioClients.forward(_profileDict["url"], *gradioParas, fn_index=2)
         if stat == 'Success':
-            message = MessageSegment.record(wav_path)
+            message = MessageSegment.record(Path(wav_path))
         else:
             message = MessageSegment.text(stat)
     else:
