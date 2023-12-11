@@ -3,6 +3,7 @@ from pathlib import Path
 import httpx
 from gradio_client import Client
 
+
 class GradioClients:
     def __init__(self):
         self.client_dict = dict()

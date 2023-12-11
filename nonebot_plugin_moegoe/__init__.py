@@ -11,6 +11,7 @@ from nonebot.matcher import Matcher
 from nonebot.params import RegexGroup, CommandArg
 from nonebot.plugin import PluginMetadata, on_regex, on_command
 from nonebot.adapters.onebot.v11 import MessageSegment, ActionFailed
+# from nonebot.adapters.console import MessageSegment
 from nonebot import get_driver
 from .utils import GradioClients, download_url, write_file
 
@@ -53,13 +54,13 @@ async def update():
     curVersion = parse(profileDict["version"])
     if newVersion.major > curVersion.major or (newVersion.major == curVersion.major and newVersion.minor > curVersion.minor):  # 有大版本更新
         logger.info(f"moegoe profile has new version {newProfileDict['version']}, you may manual update this package via pip.")
-    elif newVersion.micro > curVersion.micro:  # 只更新小版本，防止API不兼容
+    elif newVersion.major == curVersion.major and newVersion.minor == curVersion.minor and newVersion.micro > curVersion.micro:  # 只更新小版本，防止API不兼容
         if profilePath.exists():
             profilePath.rename(bakProfilePath)
         write_file(profilePath, profileData)
         profileDict = newProfileDict
         profilePreprocess()
-        logger.info(f"moegoe profile updated to version {profileDict['version']}.")
+        logger.info(f"{newVersion.micro}， {curVersion.micro}， moegoe profile updated to version {profileDict['version']}.")
     else:
         logger.info("moegoe profile checked.")
 
@@ -126,7 +127,7 @@ async def _(matcher: Matcher, args: Tuple[Any, ...] = CommandArg()):
 
 
 # api for other plugins
-async def get_record(url):
+async def get_http_record(url):
     async with httpx.AsyncClient() as client:
         resp = await client.get(url, timeout=120)
     resp.raise_for_status()
@@ -140,7 +141,7 @@ async def get_MessageSegment(url, name, msg, output_format):
     elif output_format == "share":  # Windows TIM端的url会缺失&，原因不明
         return MessageSegment.share(url=url, title=name + "说...", content=msg, image="")
     else:
-        return await get_record(url)
+        return await get_http_record(url)
 
 
 def getApiConfigs(api_name):
@@ -203,31 +204,33 @@ async def kr_func(
 
 async def cn_func(
     msg,
-    name=profileDict["cnapi"]["order"][0],
-    nation="ZH",
+    name=None,
     output_format=profileDict["api"]["return_format"],
-    lang="ZH",
     para_dict=dict(),
 ):
-    id = cn_dict[name]
-    paras = getApiConfigs("cnapi")
+    profileKey = "cnapi"
+    paras = getApiConfigs(profileKey)
     paras.update(para_dict)
-    if profileDict["cnapi"]["is_gradio"]:
+    assert 'nation', 'lang' in paras.keys()
+
+    _profileDict = profileDict[profileKey]
+    if name is None:
+        name = _profileDict["order"][0]
+    id = cn_dict[name]
+
+    if profileDict[profileKey]["is_gradio"]:
         paras['msg'] = msg
-        paras['name'] = f'{name}_{nation}'
-        paras['lang'] = lang
+        paras['name'] = f"{name}_{paras['nation']}"
         gradioParas = list()
-        for k in profileDict["cnapi"]["gradio_paralist"]:
+        for k in _profileDict["gradio_paralist"]:
             gradioParas.append(paras[k])
-        stat, wav_path = await gradioClients.forward(profileDict["cnapi"]["url"], *gradioParas, fn_index=2)
+        stat, wav_path = gradioClients.forward(_profileDict["url"], *gradioParas, fn_index=2)
         if stat == 'Success':
             message = MessageSegment.record(wav_path)
         else:
             message = MessageSegment.text(stat)
     else:
-        url = cnapi.substitute(
-            text=msg, name=name, nation=nation, speaker=name, lang=lang, id=id, **paras
-        )
+        url = cnapi.substitute(text=msg, name=name, speaker=name, id=id, **paras)
         message = await get_MessageSegment(url, name, msg, output_format)
     return message
 
@@ -291,13 +294,13 @@ async def _(matcher: Matcher, matched: Tuple[Any, ...] = RegexGroup()):
     assert len(matched) >= 6
     nation, name, _, para, lang, msg = matched[0:6]
     para_dict = para_process(para)
+    para_dict['nation'] = nationDict[nation]
+    para_dict['lang'] = langDict[lang]
     for en, cn in profileDict["cnapi"]["replace"]:
         msg = msg.replace(en, cn)
     try:
         record = await cn_func(
-            nation=nationDict[nation],
             msg=msg,
-            lang=langDict[lang],
             name=name,
             para_dict=para_dict,
         )

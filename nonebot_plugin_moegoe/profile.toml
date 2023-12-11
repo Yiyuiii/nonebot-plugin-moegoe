@@ -52,7 +52,7 @@ is_gradio = true
 gradio_paralist = ["msg", 'name', 'emotion', 'sdp_ratio', 'noise', 'noisew', 'length', 'lang', 'audio_component']
 url = "https://v2.genshinvoice.top/"
 # url = "https://genshin.azurewebsites.net/api/speak?format=mp3&text=${text}&id=${id}&length=${length}&noise=${noise}&noisew=${noisew}"  # 需要apikey
-voice_format = "wav"
+voice_format = "mp3"
 emotion = -1  # 情感 float (-1 - 9)
 sdp_ratio = 0.5  # SDP/DP混合比 float (0 - 1)
 length = 0.8  # 整体语速 float (0.1 - 2)
