@@ -1,4 +1,4 @@
-version = "0.9.1"
+version = "0.10.0"
 priority = 5
 
 [plugin_meta]
@@ -30,30 +30,38 @@ noise = 0.6
 noisew = 0.8
 
 [jpapi]
+is_gradio = false
 url = "https://moegoe.azurewebsites.net/api/speak?text=${text}&id=${id}"
 order = ["宁宁", "爱瑠", "芳乃", "茉子", "丛雨", "小春", "七海"]
 regex = "^让(宁宁|爱瑠|芳乃|茉子|丛雨|小春|七海)(以(.+))?说(?:日语|日文|日本语)(?:：|:)(.+)$"
 
 [jp2api]
+is_gradio = false
 url = "https://moegoe.azurewebsites.net/api/speak2?text=${text}&id=${id}"
 order = ["妃爱", "华乃", "亚澄", "诗樱", "天梨", "里", "广梦", "莉莉子"]
 regex = "^让(妃爱|华乃|亚澄|诗樱|天梨|里|广梦|莉莉子)(以(.+))?说(?:日语|日文|日本语)(?:：|:)(.+)$"
 
 [krapi]
+is_gradio = false
 url = "https://moegoe.azurewebsites.net/api/speakkr?text=${text}&id=${id}"
 order = ["Sua", "Mimiru", "Arin", "Yeonhwa", "Yuhwa", "Seonbae"]
 regex = "^让(Sua|Mimiru|Arin|Yeonhwa|Yuhwa|Seonbae)(以(.+))?说(?:韩语|韩文|韩国语)(?:：|:)(.+)$"
 
 [cnapi]
-url = "https://genshinvoice.top/api?speaker=${speaker}_${nation}&text=${text}&format=wav&length=${length}&noise=${noise}&noisew=${noisew}&sdp_ratio=0.2&language=${lang}"
+is_gradio = true
+gradio_paralist = ["msg", 'name', 'emotion', 'sdp_ratio', 'noise', 'noisew', 'length', 'lang', 'audio_component']
+url = "https://v2.genshinvoice.top/"
 # url = "https://genshin.azurewebsites.net/api/speak?format=mp3&text=${text}&id=${id}&length=${length}&noise=${noise}&noisew=${noisew}"  # 需要apikey
-voice_format = "mp3"
-length = 1  # 整体语速
-noise = 0.6  # 感情：控制感情变化和稳定程度
-noisew = 0.8  #  音素长度：控制音节发音长度变化程度
+voice_format = "wav"
+emotion = -1  # 情感 float (-1 - 9)
+sdp_ratio = 0.5  # SDP/DP混合比 float (0 - 1)
+length = 0.8  # 整体语速 float (0.1 - 2)
+noise = 0.2  # 感情：控制感情变化和稳定程度 float (0.1 - 2)
+noisew = 0.9  #  音素长度：控制音节发音长度变化程度 float (0.1 - 2)
+audio_component = "https://mirror.ghproxy.com/https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav"  # 情感参考音频（WAV 格式） str
 order = ["派蒙"]
 regex = "^让(中配|英配|日配)?([^0-9.]+)(以(.+))?说(国语|汉语|汉文|中文|Chinese|英语|英文|English|日语|日文|日本语|Japanese)?(?:[：|:]*)(.+)$"
 replace = [[',', '，'], ['.', '。'], ['!', '！'], ['?', '？'], ['0', '零'], ['1', '一'], ['2', '二'], ['3', '三'], ['4', '四'], ['5', '五'], ['6', '六'], ['7', '七'], ['8', '八'], ['9', '九'], ]
 nation = {'中配'='ZH','英配'='EN','日配'='JP'}
 lang = {'国语'='ZH','汉语'='ZH','汉文'='ZH','中文'='ZH','Chinese'='ZH','英语'='EN','英文'='EN','English'='EN','日语'='JP','日文'='JP','日本语'='JP','Japanese'='JP'}
-character_list = '请到API界面查看：https://genshinvoice.top/v2/'
+character_list = '请到API界面查看：https://v2.genshinvoice.top/'

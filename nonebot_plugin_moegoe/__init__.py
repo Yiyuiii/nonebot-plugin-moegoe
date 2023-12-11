@@ -12,9 +12,10 @@ from nonebot.params import RegexGroup, CommandArg
 from nonebot.plugin import PluginMetadata, on_regex, on_command
 from nonebot.adapters.onebot.v11 import MessageSegment, ActionFailed
 from nonebot import get_driver
-from .utils import download_url, write_file
+from .utils import GradioClients, download_url, write_file
 
 driver = get_driver()
+gradioClients = GradioClients()
 
 dataPath = Path() / "data" / "moegoe"
 profilePath = dataPath / "profile.toml"
@@ -149,6 +150,9 @@ def getApiConfigs(api_name):
         ("length", "length", 1),
         ("noise", "noise", 0.6),
         ("noisew", "noisew", 0.8),
+        ("emotion", "emotion", -1),
+        ("sdp_ratio", "sdp_ratio", 0.5),
+        ("audio_component", "audio_component", ''),
     ):
         config[k] = d
         for name in (api_name, "api"):
@@ -208,10 +212,24 @@ async def cn_func(
     id = cn_dict[name]
     paras = getApiConfigs("cnapi")
     paras.update(para_dict)
-    url = cnapi.substitute(
-        text=msg, name=name, nation=nation, speaker=name, lang=lang, id=id, **paras
-    )
-    return await get_MessageSegment(url, name, msg, output_format)
+    if profileDict["cnapi"]["is_gradio"]:
+        paras['msg'] = msg
+        paras['name'] = f'{name}_{nation}'
+        paras['lang'] = lang
+        gradioParas = list()
+        for k in profileDict["cnapi"]["gradio_paralist"]:
+            gradioParas.append(paras[k])
+        stat, wav_path = await gradioClients.forward(profileDict["cnapi"]["url"], *gradioParas, fn_index=2)
+        if stat == 'Success':
+            message = MessageSegment.record(wav_path)
+        else:
+            message = MessageSegment.text(stat)
+    else:
+        url = cnapi.substitute(
+            text=msg, name=name, nation=nation, speaker=name, lang=lang, id=id, **paras
+        )
+        message = await get_MessageSegment(url, name, msg, output_format)
+    return message
 
 
 jp_cmd = on_regex(profileDict["jpapi"]["regex"], block=True, priority=profileDict["priority"])
