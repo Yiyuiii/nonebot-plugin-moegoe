@@ -136,7 +136,7 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 
 ## :clipboard: 更新日志
 
-#### 2023.12.11 > v0.10.0 :fire:
+#### 2023.12.11 > v0.10.1 :fire:
 
 - 跟随genshinvoice.top更新cnapi以及相关处理流程。
 - 优化版本控制代码和逻辑，考虑到minor版本更新经常带来profile和旧版本代码的不兼容问题，今后只会自动更新micro新版本的profile。
