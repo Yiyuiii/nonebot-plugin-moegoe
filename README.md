@@ -136,7 +136,7 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 
 ## :clipboard: 更新日志
 
-#### 2023.12.12 > v0.10.2 :fire:
+#### 2023.12.12 > v0.10.3 :fire:
 
 - Fix: 优化了api优先级机制和gradio接口处理机制。
 

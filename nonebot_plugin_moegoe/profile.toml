@@ -1,4 +1,4 @@
-version = "0.10.2"
+version = "0.10.3"
 priority = 5
 
 [plugin_meta]
@@ -50,7 +50,7 @@ regex = "^让(Sua|Mimiru|Arin|Yeonhwa|Yuhwa|Seonbae)(以(.+))?说(?:韩语|韩�
 [cnapi]
 priority = 6
 is_gradio = true
-gradio_paralist = ["msg", 'name', 'emotion', 'sdp_ratio', 'noise', 'noisew', 'length', 'lang', 'audio_component']
+gradio_paralist = ["msg", 'name', 'sdp_ratio', 'noise', 'noisew', 'length', 'lang', 'audio_component']
 url = "https://v2.genshinvoice.top/"
 # url = "https://genshin.azurewebsites.net/api/speak?format=mp3&text=${text}&id=${id}&length=${length}&noise=${noise}&noisew=${noisew}"  # 需要apikey
 voice_format = "mp3"
