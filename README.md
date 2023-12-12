@@ -138,7 +138,7 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 
 #### 2023.12.12 > v0.10.2 :fire:
 
-- 优化了api优先级机制和gradio接口处理机制。
+- Fix: 优化了api优先级机制和gradio接口处理机制。
 
 #### 2023.12.11 > v0.10.1
 
@@ -178,7 +178,7 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 - 应官方要求升级包依赖版本。
 
 #### 2022.12.18 > v0.7.1
-- 修复安装失败的BUG。profile.toml的位置改变，之前版本的配置可能无法自动更新profile.toml配置文件。
+- Fix: 修复安装失败的BUG。profile.toml的位置改变，之前版本的配置可能无法自动更新profile.toml配置文件。
 
 #### 2022.11.29 > v0.7.0
 - 从__init__.py抽离一些配置组成profile.toml配置文件，现在可以自动从github上抓取url等配置的更新了。
