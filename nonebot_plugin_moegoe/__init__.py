@@ -238,7 +238,7 @@ async def cn_func(
 jp_cmd = on_regex(profileDict["jpapi"]["regex"], block=True, priority=profileDict["priority"])
 jp2_cmd = on_regex(profileDict["jp2api"]["regex"], block=True, priority=profileDict["priority"])
 kr_cmd = on_regex(profileDict["krapi"]["regex"], block=True, priority=profileDict["priority"])
-cn_cmd = on_regex(profileDict["cnapi"]["regex"], block=True, priority=profileDict["priority"])
+cn_cmd = on_regex(profileDict["cnapi"]["regex"], block=True, priority=profileDict["cnapi"]["priority"])
 
 
 async def msg_process(matcher: Matcher, matched: Tuple[Any, ...], api_func):

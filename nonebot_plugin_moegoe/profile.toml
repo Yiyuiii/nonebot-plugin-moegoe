@@ -65,3 +65,4 @@ replace = [[',', '，'], ['.', '。'], ['!', '！'], ['?', '？'], ['0', '零'],
 nation = {'中配'='ZH','英配'='EN','日配'='JP'}
 lang = {'国语'='ZH','汉语'='ZH','汉文'='ZH','中文'='ZH','Chinese'='ZH','英语'='EN','英文'='EN','English'='EN','日语'='JP','日文'='JP','日本语'='JP','Japanese'='JP'}
 character_list = '请到API界面查看：https://v2.genshinvoice.top/'
+priority = 6
