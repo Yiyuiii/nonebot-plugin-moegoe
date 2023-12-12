@@ -1,4 +1,4 @@
-version = "0.10.1"
+version = "0.10.2"
 priority = 5
 
 [plugin_meta]
@@ -48,6 +48,7 @@ order = ["Sua", "Mimiru", "Arin", "Yeonhwa", "Yuhwa", "Seonbae"]
 regex = "^让(Sua|Mimiru|Arin|Yeonhwa|Yuhwa|Seonbae)(以(.+))?说(?:韩语|韩文|韩国语)(?:：|:)(.+)$"
 
 [cnapi]
+priority = 6
 is_gradio = true
 gradio_paralist = ["msg", 'name', 'emotion', 'sdp_ratio', 'noise', 'noisew', 'length', 'lang', 'audio_component']
 url = "https://v2.genshinvoice.top/"

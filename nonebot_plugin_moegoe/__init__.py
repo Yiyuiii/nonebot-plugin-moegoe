@@ -108,7 +108,7 @@ profilePreprocess()
 
 # plugin commands
 plugin_cmd = on_command(
-    profileDict["plugin"]["cmd"], block=True, priority=profileDict["priority"]
+    profileDict["plugin"]["cmd"], block=True, priority=profileDict["plugin"]["priority"] if "priority" in profileDict["plugin"].keys() else profileDict["priority"]
 )
 
 
@@ -235,10 +235,10 @@ async def cn_func(
     return message
 
 
-jp_cmd = on_regex(profileDict["jpapi"]["regex"], block=True, priority=profileDict["priority"])
-jp2_cmd = on_regex(profileDict["jp2api"]["regex"], block=True, priority=profileDict["priority"])
-kr_cmd = on_regex(profileDict["krapi"]["regex"], block=True, priority=profileDict["priority"])
-cn_cmd = on_regex(profileDict["cnapi"]["regex"], block=True, priority=profileDict["priority"])
+jp_cmd = on_regex(profileDict["jpapi"]["regex"], block=True, priority=profileDict["jpapi"]["priority"] if "priority" in profileDict["jpapi"].keys() else profileDict["priority"])
+jp2_cmd = on_regex(profileDict["jp2api"]["regex"], block=True, priority=profileDict["jp2api"]["priority"] if "priority" in profileDict["jp2api"].keys() else profileDict["priority"])
+kr_cmd = on_regex(profileDict["krapi"]["regex"], block=True, priority=profileDict["krapi"]["priority"] if "priority" in profileDict["krapi"].keys() else profileDict["priority"])
+cn_cmd = on_regex(profileDict["cnapi"]["regex"], block=True, priority=profileDict["cnapi"]["priority"] if "priority" in profileDict["cnapi"].keys() else profileDict["priority"])
 
 
 async def msg_process(matcher: Matcher, matched: Tuple[Any, ...], api_func):
@@ -304,6 +304,9 @@ async def _(matcher: Matcher, matched: Tuple[Any, ...] = RegexGroup()):
             name=name,
             para_dict=para_dict,
         )
+    except TypeError as e:
+        await matcher.finish("API调用失败，TypeError，原因可能是角色名错误、API跑路。")
+        return
     except Exception as e:
         await matcher.finish("API调用失败：" + str(e) + "。原因可能是文本语言不匹配、角色名错误、API跑路。")
         return
