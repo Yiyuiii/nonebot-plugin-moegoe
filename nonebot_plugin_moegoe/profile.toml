@@ -1,4 +1,4 @@
-version = "0.10.0"
+version = "0.10.1"
 priority = 5
 
 [plugin_meta]
@@ -53,11 +53,11 @@ gradio_paralist = ["msg", 'name', 'emotion', 'sdp_ratio', 'noise', 'noisew', 'le
 url = "https://v2.genshinvoice.top/"
 # url = "https://genshin.azurewebsites.net/api/speak?format=mp3&text=${text}&id=${id}&length=${length}&noise=${noise}&noisew=${noisew}"  # 需要apikey
 voice_format = "mp3"
-emotion = -1  # 情感 float (-1 - 9)
-sdp_ratio = 0.5  # SDP/DP混合比 float (0 - 1)
-length = 0.8  # 整体语速 float (0.1 - 2)
-noise = 0.2  # 感情：控制感情变化和稳定程度 float (0.1 - 2)
-noisew = 0.9  #  音素长度：控制音节发音长度变化程度 float (0.1 - 2)
+emotion = 2  # 情感 float (-1 - 9)
+sdp_ratio = 0  # SDP/DP混合比 float (0 - 1)
+length = 1  # 整体语速 float (0.1 - 2)
+noise = 0.4  # 感情：控制感情变化和稳定程度 float (0.1 - 2)
+noisew = 0.8  #  音素长度：控制音节发音长度变化程度 float (0.1 - 2)
 audio_component = "https://mirror.ghproxy.com/https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav"  # 情感参考音频（WAV 格式） str
 order = ["派蒙"]
 regex = "^让(中配|英配|日配)?([^0-9.]+)(以(.+))?说(国语|汉语|汉文|中文|Chinese|英语|英文|English|日语|日文|日本语|Japanese)?(?:[：|:]*)(.+)$"
