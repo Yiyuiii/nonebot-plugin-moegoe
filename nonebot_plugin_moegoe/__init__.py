@@ -32,7 +32,8 @@ if profilePath.exists():
 if saved_profileDict:
     savedVersion = parse(saved_profileDict["version"])
     curVersion = parse(profileDict["version"])
-    if curVersion.major > savedVersion.major or (curVersion.major == savedVersion.major and curVersion.minor > savedVersion.minor):  # 新包有大版本不兼容更新，备份旧包
+    if curVersion.major > savedVersion.major or (
+            curVersion.major == savedVersion.major and curVersion.minor > savedVersion.minor):  # 新包有大版本不兼容更新，备份旧包
         profilePath.rename(bakProfilePath)
         write_file(profilePath, tomllib.dumps(profileDict), binary=False)
     else:
@@ -52,15 +53,18 @@ async def update():
     newProfileDict = tomllib.loads(profileData.decode("utf-8"))
     newVersion = parse(newProfileDict["version"])
     curVersion = parse(profileDict["version"])
-    if newVersion.major > curVersion.major or (newVersion.major == curVersion.major and newVersion.minor > curVersion.minor):  # 有大版本更新
-        logger.info(f"moegoe profile has new version {newProfileDict['version']}, you may manual update this package via pip.")
+    if newVersion.major > curVersion.major or (
+            newVersion.major == curVersion.major and newVersion.minor > curVersion.minor):  # 有大版本更新
+        logger.info(
+            f"moegoe profile has new version {newProfileDict['version']}, you may manual update this package via pip.")
     elif newVersion.major == curVersion.major and newVersion.minor == curVersion.minor and newVersion.micro > curVersion.micro:  # 只更新小版本，防止API不兼容
         if profilePath.exists():
             profilePath.rename(bakProfilePath)
         write_file(profilePath, profileData)
         profileDict = newProfileDict
         profilePreprocess()
-        logger.info(f"{newVersion.micro}， {curVersion.micro}， moegoe profile updated to version {profileDict['version']}.")
+        logger.info(
+            f"{newVersion.micro}， {curVersion.micro}， moegoe profile updated to version {profileDict['version']}.")
     else:
         logger.info("moegoe profile checked.")
 
@@ -75,10 +79,10 @@ def profilePreprocess():
         defaultdict(lambda: -1) for _ in range(4)
     ]  # 缺省值-1
     for d, l in (
-        (jp_dict, profileDict["jpapi"]["order"]),
-        (jp2_dict, profileDict["jp2api"]["order"]),
-        (kr_dict, profileDict["krapi"]["order"]),
-        (cn_dict, profileDict["cnapi"]["order"]),
+            (jp_dict, profileDict["jpapi"]["order"]),
+            (jp2_dict, profileDict["jp2api"]["order"]),
+            (kr_dict, profileDict["krapi"]["order"]),
+            (cn_dict, profileDict["cnapi"]["order"]),
     ):
         for i, n in enumerate(l):
             d[n] = i
@@ -108,7 +112,9 @@ profilePreprocess()
 
 # plugin commands
 plugin_cmd = on_command(
-    profileDict["plugin"]["cmd"], block=True, priority=profileDict["plugin"]["priority"] if "priority" in profileDict["plugin"].keys() else profileDict["priority"]
+    profileDict["plugin"]["cmd"], block=True,
+    priority=profileDict["plugin"]["priority"] if "priority" in profileDict["plugin"].keys() else profileDict[
+        "priority"]
 )
 
 
@@ -147,13 +153,15 @@ async def get_MessageSegment(url, name, msg, output_format):
 def getApiConfigs(api_name):
     config = dict()
     for k, q, d in (
-        ("format", "voice_format", "mp3"),
-        ("length", "length", 1),
-        ("noise", "noise", 0.6),
-        ("noisew", "noisew", 0.8),
-        ("emotion", "emotion", -1),
-        ("sdp_ratio", "sdp_ratio", 0.5),
-        ("audio_component", "audio_component", ''),
+            ("format", "voice_format", "mp3"),
+            ("length", "length", 1),
+            ("noise", "noise", 0.6),
+            ("noisew", "noisew", 0.8),
+            ("emotion", "emotion", -1),
+            ("sdp_ratio", "sdp_ratio", 0.5),
+            ("audio_component", "audio_component", ''),
+            ("text_prompt", "text_prompt", "Happy"),
+            ("prompt_mode", "prompt_mode", "Text prompt")
     ):
         config[k] = d
         for name in (api_name, "api"):
@@ -164,10 +172,10 @@ def getApiConfigs(api_name):
 
 
 async def jp_func(
-    msg,
-    name=profileDict["jpapi"]["order"][0],
-    output_format=profileDict["api"]["return_format"],
-    para_dict=dict(),
+        msg,
+        name=profileDict["jpapi"]["order"][0],
+        output_format=profileDict["api"]["return_format"],
+        para_dict=dict(),
 ):
     id = jp_dict[name]
     paras = getApiConfigs("jpapi")
@@ -177,10 +185,10 @@ async def jp_func(
 
 
 async def jp2_func(
-    msg,
-    name=profileDict["jp2api"]["order"][0],
-    output_format=profileDict["api"]["return_format"],
-    para_dict=dict(),
+        msg,
+        name=profileDict["jp2api"]["order"][0],
+        output_format=profileDict["api"]["return_format"],
+        para_dict=dict(),
 ):
     id = jp2_dict[name]
     paras = getApiConfigs("jp2api")
@@ -190,10 +198,10 @@ async def jp2_func(
 
 
 async def kr_func(
-    msg,
-    name=profileDict["krapi"]["order"][0],
-    output_format=profileDict["api"]["return_format"],
-    para_dict=dict(),
+        msg,
+        name=profileDict["krapi"]["order"][0],
+        output_format=profileDict["api"]["return_format"],
+        para_dict=dict(),
 ):
     id = kr_dict[name]
     paras = getApiConfigs("krapi")
@@ -203,10 +211,10 @@ async def kr_func(
 
 
 async def cn_func(
-    msg,
-    name=None,
-    output_format=profileDict["api"]["return_format"],
-    para_dict=dict(),
+        msg,
+        name=None,
+        output_format=profileDict["api"]["return_format"],
+        para_dict=dict(),
 ):
     profileKey = "cnapi"
     paras = getApiConfigs(profileKey)
@@ -224,7 +232,7 @@ async def cn_func(
         gradioParas = list()
         for k in _profileDict["gradio_paralist"]:
             gradioParas.append(paras[k])
-        stat, wav_path = gradioClients.forward(_profileDict["url"], *gradioParas, msg, "Text prompt", fn_index=0)
+        stat, wav_path = gradioClients.forward(_profileDict["url"], *gradioParas, fn_index=0)
         if stat == 'Success':
             message = MessageSegment.record(Path(wav_path))
         else:
@@ -235,10 +243,18 @@ async def cn_func(
     return message
 
 
-jp_cmd = on_regex(profileDict["jpapi"]["regex"], block=True, priority=profileDict["jpapi"]["priority"] if "priority" in profileDict["jpapi"].keys() else profileDict["priority"])
-jp2_cmd = on_regex(profileDict["jp2api"]["regex"], block=True, priority=profileDict["jp2api"]["priority"] if "priority" in profileDict["jp2api"].keys() else profileDict["priority"])
-kr_cmd = on_regex(profileDict["krapi"]["regex"], block=True, priority=profileDict["krapi"]["priority"] if "priority" in profileDict["krapi"].keys() else profileDict["priority"])
-cn_cmd = on_regex(profileDict["cnapi"]["regex"], block=True, priority=profileDict["cnapi"]["priority"] if "priority" in profileDict["cnapi"].keys() else profileDict["priority"])
+jp_cmd = on_regex(profileDict["jpapi"]["regex"], block=True,
+                  priority=profileDict["jpapi"]["priority"] if "priority" in profileDict["jpapi"].keys() else
+                  profileDict["priority"])
+jp2_cmd = on_regex(profileDict["jp2api"]["regex"], block=True,
+                   priority=profileDict["jp2api"]["priority"] if "priority" in profileDict["jp2api"].keys() else
+                   profileDict["priority"])
+kr_cmd = on_regex(profileDict["krapi"]["regex"], block=True,
+                  priority=profileDict["krapi"]["priority"] if "priority" in profileDict["krapi"].keys() else
+                  profileDict["priority"])
+cn_cmd = on_regex(profileDict["cnapi"]["regex"], block=True,
+                  priority=profileDict["cnapi"]["priority"] if "priority" in profileDict["cnapi"].keys() else
+                  profileDict["priority"])
 
 
 async def msg_process(matcher: Matcher, matched: Tuple[Any, ...], api_func):
@@ -265,9 +281,12 @@ def para_process(para_str: Optional[str]):
         cur_key = None
         for part in parts:
             if cur_key:
-                match = re.search(r"[-+]?\d*\.\d+|\d+", part)  # str转浮点数
+                match = re.search(r"[-+]?\d*\.\d+|\d+|[a-zA-Z]+", part)  # str转浮点数
                 if match:
-                    para_dict[paramap_dict[cur_key]] = float(match.group())
+                    try:
+                        para_dict[paramap_dict[cur_key]] = float(match.group())
+                    except Exception as e:
+                        para_dict[paramap_dict[cur_key]] = str(match.group())
                 cur_key = None
             elif part in keywords:
                 cur_key = part
