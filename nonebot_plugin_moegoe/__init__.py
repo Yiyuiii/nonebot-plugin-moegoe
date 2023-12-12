@@ -248,12 +248,12 @@ async def msg_process(matcher: Matcher, matched: Tuple[Any, ...], api_func):
     try:
         record = await api_func(msg=msg, name=name, para_dict=para_dict)
     except Exception as e:
-        await matcher.finish("API调用失败：" + str(e) + "。原因可能是文本语言不匹配、API跑路。")
+        await matcher.finish("moegoe API调用失败：" + str(e) + "。原因可能是文本语言不匹配、API跑路。")
         return
     try:
         await matcher.finish(record)
     except ActionFailed as e:
-        await matcher.finish("语音发送失败：" + str(e))
+        await matcher.finish("moegoe语音发送失败：" + str(e))
 
 
 def para_process(para_str: Optional[str]):
@@ -305,12 +305,12 @@ async def _(matcher: Matcher, matched: Tuple[Any, ...] = RegexGroup()):
             para_dict=para_dict,
         )
     except TypeError as e:
-        await matcher.finish("API调用失败，TypeError，原因可能是角色名错误、API跑路。")
+        await matcher.finish("moegoe API调用失败，TypeError，原因可能是角色名错误、API跑路。")
         return
     except Exception as e:
-        await matcher.finish("API调用失败：" + str(e) + "。原因可能是文本语言不匹配、角色名错误、API跑路。")
+        await matcher.finish("moegoe API调用失败：" + str(e) + "。原因可能是文本语言不匹配、角色名错误、API跑路。")
         return
     try:
         await matcher.finish(record)
     except ActionFailed as e:
-        await matcher.finish("语音发送失败：" + str(e))
+        await matcher.finish("moegoe语音发送失败：" + str(e))
