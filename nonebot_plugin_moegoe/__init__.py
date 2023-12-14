@@ -295,10 +295,14 @@ async def _(matcher: Matcher, matched: Tuple[Any, ...] = RegexGroup()):
     assert len(matched) >= 6
     nation, name, _, para, lang, msg = matched[0:6]
     para_dict = para_process(para)
+    # 通过正则把 -p 从msg中提取出来，并进行判断
     match = re.search(r"(-p|--prompt) (.+)", msg)
     if match:
         para_dict['text_prompt'] = match.groups(1)
         msg = msg.replace(match.group(), "")
+    # 并没有 -p 则把msg当作提示词
+    else:
+        para_dict['text_prompt'] = msg
     para_dict['nation'] = nationDict[nation]
     para_dict['lang'] = langDict[lang]
     for en, cn in profileDict["cnapi"]["replace"]:
