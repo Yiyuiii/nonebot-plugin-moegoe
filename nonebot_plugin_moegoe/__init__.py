@@ -154,6 +154,7 @@ def getApiConfigs(api_name):
         ("emotion", "emotion", -1),
         ("sdp_ratio", "sdp_ratio", 0.5),
         ("audio_component", "audio_component", ''),
+        ("text_prompt", "text_prompt", 'Happy'),
     ):
         config[k] = d
         for name in (api_name, "api"):
@@ -224,7 +225,7 @@ async def cn_func(
         gradioParas = list()
         for k in _profileDict["gradio_paralist"]:
             gradioParas.append(paras[k])
-        stat, wav_path = gradioClients.forward(_profileDict["url"], *gradioParas, msg, "Text prompt", fn_index=0)
+        stat, wav_path = gradioClients.forward(_profileDict["url"], *gradioParas, "Text prompt", fn_index=0)
         if stat == 'Success':
             message = MessageSegment.record(Path(wav_path))
         else:
@@ -294,6 +295,14 @@ async def _(matcher: Matcher, matched: Tuple[Any, ...] = RegexGroup()):
     assert len(matched) >= 6
     nation, name, _, para, lang, msg = matched[0:6]
     para_dict = para_process(para)
+    # 通过正则把 -p 从msg中提取出来，并进行判断
+    match = re.search(r"(-p|--prompt) (.+)", msg)
+    if match:
+        para_dict['text_prompt'] = match.groups(1)
+        msg = msg.replace(match.group(), "")
+    # 并没有 -p 则把msg当作提示词
+    else:
+        para_dict['text_prompt'] = msg
     para_dict['nation'] = nationDict[nation]
     para_dict['lang'] = langDict[lang]
     for en, cn in profileDict["cnapi"]["replace"]:
