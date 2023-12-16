@@ -2,7 +2,7 @@
  * @Author         : yiyuiii
  * @Date           : 2022-10-11 00:00:00
  * @LastEditors    : yiyuiii
- * @LastEditTime   : 2023-12-12 00:00:00
+ * @LastEditTime   : 2023-12-16 00:00:00
  * @Description    : None
  * @GitHub         : https://github.com/yiyuiii
 -->
@@ -46,7 +46,7 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 
 **在聊天中输入:**
 
-- **让**(中配|英配|日配)[角色]\(以[参数])**说**(中文|英语|日语)(文本)
+- **让**(中配|英配|日配)[角色]\(以[参数])**说**(中文|英语|日语)(文本)( -p 英文语气提示词)
 - **让**[宁宁|爱瑠|芳乃|茉子|丛雨|小春|七海|妃爱|华乃|亚澄|诗樱|天梨|里|广梦|莉莉子]\(以[参数])**说日语：**(日语)
 - **让**[Sua|Mimiru|Arin|Yeonhwa|Yuhwa|Seonbae]\(以[参数])**说韩语：**(韩语)
 
@@ -136,8 +136,9 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 
 ## :clipboard: 更新日志
 
-#### 2023.12.12 > v0.10.4 :fire:
+#### 2023.12.16 > v0.10.4 :fire:
 
+- (-p 英文语气提示词) [功能添加](https://github.com/Yiyuiii/nonebot-plugin-moegoe/pull/39) by [fireinsect](https://github.com/fireinsect)
 - 跟随genshinvoice.top更新cnapi以及相关处理流程。
 - Fix: 优化了api优先级机制和gradio接口处理机制。
 
