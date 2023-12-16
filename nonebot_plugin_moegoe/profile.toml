@@ -1,4 +1,4 @@
-version = "0.10.3"
+version = "0.10.4"
 priority = 5
 
 [plugin_meta]
@@ -50,7 +50,7 @@ regex = "^让(Sua|Mimiru|Arin|Yeonhwa|Yuhwa|Seonbae)(以(.+))?说(?:韩语|韩�
 [cnapi]
 priority = 6
 is_gradio = true
-gradio_paralist = ["msg", 'name', 'sdp_ratio', 'noise', 'noisew', 'length', 'lang', 'audio_component']
+gradio_paralist = ["msg", 'name', 'sdp_ratio', 'noise', 'noisew', 'length', 'lang', 'audio_component', 'text_prompt']
 url = "https://v2.genshinvoice.top/"
 # url = "https://genshin.azurewebsites.net/api/speak?format=mp3&text=${text}&id=${id}&length=${length}&noise=${noise}&noisew=${noisew}"  # 需要apikey
 voice_format = "mp3"
@@ -60,6 +60,7 @@ length = 1  # 整体语速 float (0.1 - 2)
 noise = 0.4  # 感情：控制感情变化和稳定程度 float (0.1 - 2)
 noisew = 0.8  #  音素长度：控制音节发音长度变化程度 float (0.1 - 2)
 audio_component = "https://mirror.ghproxy.com/https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav"  # 情感参考音频（WAV 格式） str
+text_prompt = "Happy"
 order = ["派蒙"]
 regex = "^让(中配|英配|日配)?([^0-9.]+)(以(.+))?说(国语|汉语|汉文|中文|Chinese|英语|英文|English|日语|日文|日本语|Japanese)?(?:[：|:]*)(.+)$"
 replace = [[',', '，'], ['.', '。'], ['!', '！'], ['?', '？'], ['0', '零'], ['1', '一'], ['2', '二'], ['3', '三'], ['4', '四'], ['5', '五'], ['6', '六'], ['7', '七'], ['8', '八'], ['9', '九'], ]
