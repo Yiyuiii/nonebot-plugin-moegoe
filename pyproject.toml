@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot-plugin-moegoe"
-version = "0.10.4"
+version = "0.10.5"
 description = "VITS AI合成原神角色语音"
 license = "MIT"
 authors = ["yiyuiii <yiyuiii@foxmail.com>"]

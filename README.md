@@ -2,7 +2,7 @@
  * @Author         : yiyuiii
  * @Date           : 2022-10-11 00:00:00
  * @LastEditors    : yiyuiii
- * @LastEditTime   : 2023-12-16 00:00:00
+ * @LastEditTime   : 2023-12-18 00:00:00
  * @Description    : None
  * @GitHub         : https://github.com/yiyuiii
 -->
@@ -136,7 +136,7 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 
 ## :clipboard: 更新日志
 
-#### 2023.12.16 > v0.10.4 :fire:
+#### 2023.12.18 > v0.10.5 :fire:
 
 - (-p 英文语气提示词) [功能添加](https://github.com/Yiyuiii/nonebot-plugin-moegoe/pull/39) by [fireinsect](https://github.com/fireinsect)
 - 跟随genshinvoice.top更新cnapi以及相关处理流程。
