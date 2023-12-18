@@ -225,7 +225,7 @@ async def cn_func(
         gradioParas = list()
         for k in _profileDict["gradio_paralist"]:
             gradioParas.append(paras[k])
-        stat, wav_path = gradioClients.forward(_profileDict["url"], *gradioParas, "Text prompt", fn_index=0)
+        stat, wav_path = gradioClients.forward(_profileDict["url"], *gradioParas, "Text prompt", paras['text_prompt'], 0, fn_index=0)
         if stat == 'Success':
             message = MessageSegment.record(Path(wav_path))
         else:
@@ -298,7 +298,7 @@ async def _(matcher: Matcher, matched: Tuple[Any, ...] = RegexGroup()):
     # 通过正则把 -p 从msg中提取出来，并进行判断
     match = re.search(r"(-p|--prompt) (.+)", msg)
     if match:
-        para_dict['text_prompt'] = match.groups(1)
+        para_dict['text_prompt'] = match.group(2)
         msg = msg.replace(match.group(), "")
     # 并没有 -p 则把msg当作提示词
     else:
