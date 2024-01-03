@@ -136,7 +136,7 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 
 ## :clipboard: 更新日志
 
-#### 2023.12.18 > v0.10.5 :fire:
+#### 2024.01.03 > v0.10.6 :fire:
 
 - (-p 英文语气提示词) [功能添加](https://github.com/Yiyuiii/nonebot-plugin-moegoe/pull/39) by [fireinsect](https://github.com/fireinsect)
 - 跟随genshinvoice.top更新cnapi以及相关处理流程。
