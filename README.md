@@ -90,9 +90,9 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 
 插件主要通过调用网络api来获取合成语音。
 
-目前中文默认使用新的免费api：https://genshinvoice.top/ ，该api目前展现出稳定的良好表现，并正在持续更新。
+目前中文默认的免费api：https://genshinvoice.top/ **已经关闭**接口，只能使用原付费api。
 
-原付费api也可继续使用，在自行获取APIKey后，在配置文件的cnapi url末尾`"`前加上`&code=你的APIKey`，即可使用。参考[Issue 17](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/17#issuecomment-1336317427)
+原付费api可继续使用，在自行获取APIKey后，在配置文件的cnapi url末尾`"`前加上`&code=你的APIKey`，即可使用。参考[Issue 17](https://github.com/Yiyuiii/nonebot-plugin-moegoe/issues/17#issuecomment-1336317427)
 
 日文和韩文的API目前正常。
 
