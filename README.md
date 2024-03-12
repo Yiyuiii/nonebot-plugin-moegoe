@@ -139,7 +139,7 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 #### 2024.01.03 > v0.10.6 :fire:
 
 - (-p 英文语气提示词) [功能添加](https://github.com/Yiyuiii/nonebot-plugin-moegoe/pull/39) by [fireinsect](https://github.com/fireinsect)
-- 跟随genshinvoice.top更新cnapi以及相关处理流程。
+- 跟随genshinvoice.top更新cnapi以及相关处理流程（该API目前已失效）。
 - Fix: 优化了api优先级机制和gradio接口处理机制。
 
 #### 2023.12.11 > v0.10.1
