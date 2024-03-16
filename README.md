@@ -79,7 +79,7 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 
 ## :wrench: 配置方法
 
-在插件初次联网成功运行后，可以发现 BOTROOT/data/moegoe/ 路径下有profile.toml文件，其中可以配置
+在插件初次联网成功运行后，可以发现 $BOTROOT/data/moegoe/ 路径下有profile.toml文件，其中可以配置
 
 - 插件优先级 priority
 - 触发正则语句 regex
