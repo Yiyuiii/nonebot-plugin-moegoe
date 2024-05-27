@@ -44,7 +44,7 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 
 ## :rocket: 使用方式
 
-**目前本仓库所有免费API均已失效，但还可接入一些付费API，或自建VITS服务。**
+**目前本仓库所有免费API均已失效，但还可接入一些付费API，或自建VITS服务([原genshinvoice.top](https://github.com/fishaudio/fish-speech?tab=readme-ov-file))。**
 
 **在聊天中输入:**
 
