@@ -46,6 +46,8 @@ https://github.com/fumiama/MoeGoe/tree/genshin
 
 **目前本仓库所有免费API均已失效，但还可接入一些付费API，或自建VITS服务([原genshinvoice.top](https://github.com/fishaudio/fish-speech?tab=readme-ov-file))。**
 
+**另外，[https://fs.firefly.matce.cn/]理论上可以通过模拟浏览器交互实现替代API的功能，欢迎大家贡献。**
+
 **在聊天中输入:**
 
 - **让**(中配|英配|日配)[角色]\(以[参数])**说**(中文|英语|日语)(文本)( -p 英文语气提示词)
